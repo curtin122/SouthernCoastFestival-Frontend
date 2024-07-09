@@ -6,6 +6,7 @@ import Utils from '../../Utils'
 
 class HomeView {
   init(){
+    console.log('HomeView.init')
     document.title = 'Home'    
     this.render()    
     Utils.pageIntroAnim()
@@ -17,8 +18,7 @@ class HomeView {
       <sc-app-header></sc-app-header>
 
       <div class="page-content">        
-        <h1>Page title</h1>
-        <p>Page content ...</p>
+        
         
       </div>      
     `

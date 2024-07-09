@@ -1,0 +1,20 @@
+// VARIABLES STLYING
+
+// imported fonts
+@font-face {
+    font-family: 'Athelas';
+    src: url('/static/fonts/Athelas-Font/Athelas-Regular.ttf');
+}
+
+:root {
+    // base
+    --base-font-family: 'Manrope', sans-serif;
+    --sub-font-family: 'Athelas', serif;
+
+    // colours
+
+    
+    // app header
+    --app-header-height: 8.5em;
+
+}

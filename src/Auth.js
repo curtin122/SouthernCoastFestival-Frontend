@@ -22,9 +22,9 @@ class Auth {
         // check loacl token exists
         if(!localStorage.accessToken) {
             // no local token
-            Toast.show("token not found")
+            // Toast.show("token not found")
             // redirect
-            gotoRoute('/signin')
+            gotoRoute('/')
             return
         }
 

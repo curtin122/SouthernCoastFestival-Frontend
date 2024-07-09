@@ -7,14 +7,15 @@ function NavigationBar() {
     return <h1>Hello!</h1>
 }
 
-const domNode = document.getElementById('navigation')
-const root = createRoot(domNode)
-root.render(<NavigationBar />)
+//const domNode = document.getElementById('navigation')
+//const root = createRoot(domNode)
+//root.render(<NavigationBar />)
 
 // components
 import './components/sc-app-header'
 
 // styles
+import './scss/master.scss'
 
 // app.init
 document.addEventListener('DOMContentLoaded', () => {

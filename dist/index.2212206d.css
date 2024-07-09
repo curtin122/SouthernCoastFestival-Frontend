@@ -1,0 +1,33 @@
+#root {
+  position: absolute;
+  inset: 0;
+  overflow: hidden auto;
+}
+
+.page-content {
+  top: var(--app-header-height);
+  width: 100%;
+  height: 100%;
+  margin: 1em auto;
+  padding: 1em;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#menu-button-container .menu-item a {
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: Athelas;
+  src: url("Athelas-Regular.a991a457.ttf");
+}
+
+:root {
+  --base-font-family: "Manrope", sans-serif;
+  --sub-font-family: "Athelas", serif;
+  --app-header-height: 8.5em;
+}
+/*# sourceMappingURL=index.2212206d.css.map */

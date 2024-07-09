@@ -2958,8 +2958,13 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _app = require("./App");
 var _appDefault = parcelHelpers.interopDefault(_app);
 var _client = require("react-dom/client");
+//const domNode = document.getElementById('navigation')
+//const root = createRoot(domNode)
+//root.render(<NavigationBar />)
 // components
 var _scAppHeader = require("./components/sc-app-header");
+// styles
+var _masterScss = require("./scss/master.scss");
 // render React components
 function NavigationBar() {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
@@ -2971,14 +2976,6 @@ function NavigationBar() {
     }, this);
 }
 _c = NavigationBar;
-const domNode = document.getElementById("navigation");
-const root = (0, _client.createRoot)(domNode);
-root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(NavigationBar, {}, void 0, false, {
-    fileName: "src/index.js",
-    lineNumber: 12,
-    columnNumber: 13
-}, undefined));
-// styles
 // app.init
 document.addEventListener("DOMContentLoaded", ()=>{
     (0, _appDefault.default).init();
@@ -2991,7 +2988,7 @@ $RefreshReg$(_c, "NavigationBar");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./App":"2kQhy","react-dom/client":"lOjBx","./components/sc-app-header":"kDC1R","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./App":"2kQhy","react-dom/client":"lOjBx","./components/sc-app-header":"kDC1R","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./scss/master.scss":"gpsI5"}],"iTorj":[function(require,module,exports) {
 "use strict";
 module.exports = require("ee51401569654d91");
 
@@ -5808,6 +5805,7 @@ var _utils = require("../../Utils");
 var _utilsDefault = parcelHelpers.interopDefault(_utils);
 class HomeView {
     init() {
+        console.log("HomeView.init");
         document.title = "Home";
         this.render();
         (0, _utilsDefault.default).pageIntroAnim();
@@ -5818,8 +5816,7 @@ class HomeView {
       <sc-app-header></sc-app-header>
 
       <div class="page-content">        
-        <h1>Page title</h1>
-        <p>Page content ...</p>
+        
         
       </div>      
     `;
@@ -6164,9 +6161,9 @@ class Auth {
         // check loacl token exists
         if (!localStorage.accessToken) {
             // no local token
-            (0, _toastDefault.default).show("token not found");
+            // Toast.show("token not found")
             // redirect
-            (0, _router.gotoRoute)("/signin");
+            (0, _router.gotoRoute)("/");
             return;
         }
         // validate token via the backend
@@ -32237,16 +32234,13 @@ module.exports = require("ef03b89c8fe2794e");
 })();
 
 },{}],"kDC1R":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _lit = require("lit");
-var _router = require("../Router");
-var _auth = require("../Auth");
-var _authDefault = parcelHelpers.interopDefault(_auth);
-var _app = require("../App");
-var _appDefault = parcelHelpers.interopDefault(_app);
-customElements.define("sc-app-header", class AppHeader extends (0, _lit.LitElement) {
+class AppHeader extends (0, _lit.LitElement) {
     constructor(){
         super();
+        this.anchorEl = null;
+        this.menuOpen = false;
+        this.reactRoot = null;
     }
     static get properties() {
         return {
@@ -32255,56 +32249,114 @@ customElements.define("sc-app-header", class AppHeader extends (0, _lit.LitEleme
             },
             user: {
                 type: String
+            },
+            anchorEl: {
+                type: Object
+            },
+            menuOpen: {
+                type: Boolean
             }
         };
     }
     firstUpdated() {
-        super.firstUpdated();
         this.navActiveLinks();
     }
     navActiveLinks() {
         const currentPath = window.location.pathname;
         const navLinks = this.shadowRoot.querySelectorAll(".app-top-nav a");
         navLinks.forEach((navLink)=>{
-            if (navLink.href.slice(-1) == "#") return;
+            if (navLink.href.slice(-1) === "#") return;
             if (navLink.pathname === currentPath) navLink.classList.add("active");
         });
     }
     render() {
-        return html`
+        return (0, _lit.html)`
             <style>
                 .app-header {
-                    background: #000000;
-                    position: fixed;
-                    top: 0;
-                    right: 0;
-                    left: 0;
-                    height: 100px;
-                    width: 90%;
-                    margin: auto;
-                    color: #fff;
+                    height: 8.5em;
+                    background-color: #000000;
+                    border-bottom: 0.2em solid #FFC600;
+
                     display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+                .app-header-left {
+                    width: 6.5em;
+                    margin: auto 1em;
+                    display: flex;
+                    align-items: center;
+
+                    .app-header-logo {
+                        width: 6.5em;
+                        position: absolute;
+                    }
+                }
+                .app-header-nav {
+                    display: flex;
+                    align-items: center;
+                    width: 50%;
+                    margin: auto;
+
+                    ul {
+                        list-style-type: none;
+                        margin: 0;
+                        padding: 0;
+
+                        font-family: var(--base-font-family);
+                        font-weight: 700;
+
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-evenly;
+                    }
+                    .nav-item a {
+                        display: block;
+                        color: #FFFFFF;
+                        text-align: center;
+                        padding: 0.75em;
+                        text-decoration: none;
+                    }
+                    .nav-item a:hover {
+                        background-color: #FFC600;
+                        color: black;
+                    }
+                }
+                .app-header-right {
+                    height: 6.5em;
+                    margin: auto 1em;
+                    display: flex;
+                    align-items: center;
                 }
             </style>
 
             <header class="app-header">
-                <div class="app-header-main">
+
+                <div class="app-header-left">
+                    <img class="app-header-logo" src="/images/soco-logo.png">
                 </div>
 
-                <nav class="app-top-nav">
+                <nav class="app-header-nav">
                     <ul>
-                        <li>Home</li>
-                        <li>Events</li>
-                        <li>Venue</li>
-                        <li>About</li>
+                        <li class="nav-item"><a href="#home">Home</a></li>
+                        <li class="nav-item"><a href="#events">Events</a></li>
+                        <li class="nav-item"><a href="#venue">Venue</a></li>
+                        <li class="nav-item"><a href="#about">About</a></li>
                     </ul>
                 </nav>
+                
+                <div class="app-header-right">
+                    <img src="https://dummyimage.com/200/a19ca1/ffffff.png&text=placeholder" alt="" height="100%">
+                </div>
+
             </header>
         `;
     }
-});
+}
+customElements.define("sc-app-header", AppHeader);
 
-},{"lit":"4antt","../Router":"kOSdl","../Auth":"wuqrX","../App":"2kQhy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"km3Ru":[function(require,module,exports) {
+},{"lit":"4antt"}],"km3Ru":[function(require,module,exports) {
 "use strict";
 var Refresh = require("7422ead32dcc1e6b");
 function debounce(func, delay) {
@@ -32442,6 +32494,6 @@ function registerExportsForReactRefresh(module1) {
     }
 }
 
-},{"7422ead32dcc1e6b":"786KC"}]},["farZc","1xC6H","8lqZg"], "8lqZg", "parcelRequiree1b3")
+},{"7422ead32dcc1e6b":"786KC"}],"gpsI5":[function() {},{}]},["farZc","1xC6H","8lqZg"], "8lqZg", "parcelRequiree1b3")
 
 //# sourceMappingURL=index.975ef6c8.js.map

@@ -1,0 +1,42 @@
+// BASE STYLING
+
+
+// ROOT -------------------------------
+#root {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+// PAGE-CONTENT ---------------------------
+.page-content {
+    position: absolute;
+    top: var(--app-header-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    margin: 1em auto;
+    padding: 1em;
+}
+
+// APP HEADER
+#menu-button-container .menu-item a {
+    text-decoration: none;
+}
+
+// RESPONSIVE - TABLET --------------------------------------------
+@media all and (max-width: 768px) {
+    // app-header
+
+}
+
+// RESPONSIVE - MOBILE --------------------------------------------
+@media all and (max-width: 390px) {
+    
+}
