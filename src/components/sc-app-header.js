@@ -38,7 +38,18 @@ customElements.define('sc-app-header', class AppHeader extends LitElement {
     render() {
         return html`
             <style>
-
+                .app-header {
+                    background: #000000;
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    height: 100px;
+                    width: 90%;
+                    margin: auto;
+                    color: #fff;
+                    display: flex;
+                }
             </style>
 
             <header class="app-header">
