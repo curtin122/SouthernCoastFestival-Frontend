@@ -21,14 +21,14 @@
     bottom: 0;
     height: 100%;
     width: 100%;
-    margin: 1em auto;
+
     padding: 1em;
+    background-color: #000000;
+    z-index: -1;
 }
 
 // APP HEADER
-#menu-button-container .menu-item a {
-    text-decoration: none;
-}
+
 
 // RESPONSIVE - TABLET --------------------------------------------
 @media all and (max-width: 768px) {

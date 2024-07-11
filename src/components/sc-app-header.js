@@ -22,19 +22,41 @@ class AppHeader extends LitElement {
     }
 
     navActiveLinks() {
-        const currentPath = window.location.pathname;
-        const navLinks = this.shadowRoot.querySelectorAll('.app-top-nav a');
-        navLinks.forEach(navLink => {
-            if (navLink.href.slice(-1) === '#') return;
-            if (navLink.pathname === currentPath) {
-                navLink.classList.add('active');
-            }
-        });
+        const links = this.shadowRoot.querySelectorAll('.nav-item')
+
+        links.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault()
+                links.forEach(link => link.classList.remove('active'))
+                event.currentTarget.classList.add('active')
+            })
+        })
     }
 
     render() {
         return html`
             <style>
+                @keyframes blink {
+                    20%,
+                    24%,
+                    55% {
+                        color: #000000;
+                        text-shadow: none;
+                    }
+
+                    0%,
+                    19%,
+                    21%,
+                    23%,
+                    25%,
+                    54%,
+                    56%,
+                    100% {
+                        text-shadow: 0 0 5px #FFC600, 0 0 10px #FFC600, 0 0 15px #FFC600, 0 0 20px #FFC600, 0 0 25px #FFC600, 0 0 30px #ff6200, 0 0 35px #ff6200;
+                        color: #fdf8c9;
+                    }
+                }
+
                 .app-header {
                     height: 8.5em;
                     background-color: #000000;
@@ -74,23 +96,36 @@ class AppHeader extends LitElement {
                         display: flex;
                         justify-content: space-evenly;
                     }
-                    .nav-item a {
+                    .nav-item {
                         display: block;
                         color: #FFFFFF;
                         text-align: center;
                         padding: 0.75em;
                         text-decoration: none;
                     }
-                    .nav-item a:hover {
-                        background-color: #FFC600;
-                        color: black;
+                    .nav-item:hover, .nav-item.active {
+                        background-color: #000000;
+                        text-shadow: 0 0 5px #FFC600, 0 0 10px #FFC600, 0 0 15px #FFC600, 0 0 20px #FFC600, 0 0 25px #FFC600, 0 0 30px #ff6200, 0 0 35px #ff6200;
+                        color: #fff6a9;
+
+                        animation: blink 7s infinite;
+                        -webkit-animation: blink 7s infinite;
                     }
                 }
                 .app-header-right {
                     height: 6.5em;
                     margin: auto 1em;
                     display: flex;
+                    flex-direction: column;
                     align-items: center;
+                    justify-content: center;
+
+                    h2 {
+                        color: #FFC600;
+                        font-weight: normal;
+                        font-size: 1.25em;
+                        margin: 0;
+                    }
                 }
             </style>
 
@@ -102,15 +137,16 @@ class AppHeader extends LitElement {
 
                 <nav class="app-header-nav">
                     <ul>
-                        <li class="nav-item"><a href="#home">Home</a></li>
-                        <li class="nav-item"><a href="#events">Events</a></li>
-                        <li class="nav-item"><a href="#venue">Venue</a></li>
-                        <li class="nav-item"><a href="#about">About</a></li>
+                        <li><a class="nav-item" href="#home">Home</a></li>
+                        <li><a class="nav-item" href="#events">Events</a></li>
+                        <li><a class="nav-item" href="#venue">Venue</a></li>
+                        <li><a class="nav-item" href="#about">About</a></li>
                     </ul>
                 </nav>
                 
                 <div class="app-header-right">
-                    <img src="https://dummyimage.com/200/a19ca1/ffffff.png&text=placeholder" alt="" height="100%">
+                    <div><h2 style="font-family: var(--base-font-family)">Geelong</h2></div>
+                    <div><h2 style="font-family: var(--sub-font-family)">2024</h2></div>
                 </div>
 
             </header>
