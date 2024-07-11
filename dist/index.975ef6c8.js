@@ -2988,7 +2988,7 @@ $RefreshReg$(_c, "NavigationBar");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./App":"2kQhy","react-dom/client":"lOjBx","./components/sc-app-header":"kDC1R","./scss/master.scss":"gpsI5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./App":"2kQhy","react-dom/client":"lOjBx","./components/sc-app-header":"kDC1R","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./scss/master.scss":"gpsI5"}],"iTorj":[function(require,module,exports) {
 "use strict";
 module.exports = require("ee51401569654d91");
 
@@ -6195,20 +6195,7 @@ class Auth {
 }
 exports.default = new Auth();
 
-},{"./App":"2kQhy","./Router":"kOSdl","./views/partials/splash":"kasI3","lit":"4antt","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kasI3":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _lit = require("lit");
-const splash = (0, _lit.html)`
-    <div class="app-splash">
-        <div>
-            <img class="app-logo" src="" />
-        </div>
-    </div>
-`;
-exports.default = splash;
-
-},{"lit":"4antt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4antt":[function(require,module,exports) {
+},{"./App":"2kQhy","./Router":"kOSdl","lit":"4antt","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/partials/splash":"kasI3"}],"4antt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _reactiveElement = require("@lit/reactive-element");
@@ -10653,7 +10640,20 @@ var CSSPlugin = {
 });
 (0, _gsapCoreJs.gsap).registerPlugin(CSSPlugin);
 
-},{"./gsap-core.js":"05eeC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iRY6S":[function(require,module,exports) {
+},{"./gsap-core.js":"05eeC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kasI3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _lit = require("lit");
+const splash = (0, _lit.html)`
+    <div class="app-splash">
+        <div>
+            <img class="app-logo" src="" />
+        </div>
+    </div>
+`;
+exports.default = splash;
+
+},{"lit":"4antt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iRY6S":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _gsap = require("gsap");
@@ -32262,39 +32262,16 @@ class AppHeader extends (0, _lit.LitElement) {
         this.navActiveLinks();
     }
     navActiveLinks() {
-        const links = this.shadowRoot.querySelectorAll(".nav-item");
-        links.forEach((link)=>{
-            link.addEventListener("click", (event)=>{
-                event.preventDefault();
-                links.forEach((link)=>link.classList.remove("active"));
-                event.currentTarget.classList.add("active");
-            });
+        const currentPath = window.location.pathname;
+        const navLinks = this.shadowRoot.querySelectorAll(".app-top-nav a");
+        navLinks.forEach((navLink)=>{
+            if (navLink.href.slice(-1) === "#") return;
+            if (navLink.pathname === currentPath) navLink.classList.add("active");
         });
     }
     render() {
         return (0, _lit.html)`
             <style>
-                @keyframes blink {
-                    20%,
-                    24%,
-                    55% {
-                        color: #000000;
-                        text-shadow: none;
-                    }
-
-                    0%,
-                    19%,
-                    21%,
-                    23%,
-                    25%,
-                    54%,
-                    56%,
-                    100% {
-                        text-shadow: 0 0 5px #FFC600, 0 0 10px #FFC600, 0 0 15px #FFC600, 0 0 20px #FFC600, 0 0 25px #FFC600, 0 0 30px #ff6200, 0 0 35px #ff6200;
-                        color: #fdf8c9;
-                    }
-                }
-
                 .app-header {
                     height: 8.5em;
                     background-color: #000000;
@@ -32334,36 +32311,23 @@ class AppHeader extends (0, _lit.LitElement) {
                         display: flex;
                         justify-content: space-evenly;
                     }
-                    .nav-item {
+                    .nav-item a {
                         display: block;
                         color: #FFFFFF;
                         text-align: center;
                         padding: 0.75em;
                         text-decoration: none;
                     }
-                    .nav-item:hover, .nav-item.active {
-                        background-color: #000000;
-                        text-shadow: 0 0 5px #FFC600, 0 0 10px #FFC600, 0 0 15px #FFC600, 0 0 20px #FFC600, 0 0 25px #FFC600, 0 0 30px #ff6200, 0 0 35px #ff6200;
-                        color: #fff6a9;
-
-                        animation: blink 7s infinite;
-                        -webkit-animation: blink 7s infinite;
+                    .nav-item a:hover {
+                        background-color: #FFC600;
+                        color: black;
                     }
                 }
                 .app-header-right {
                     height: 6.5em;
                     margin: auto 1em;
                     display: flex;
-                    flex-direction: column;
                     align-items: center;
-                    justify-content: center;
-
-                    h2 {
-                        color: #FFC600;
-                        font-weight: normal;
-                        font-size: 1.25em;
-                        margin: 0;
-                    }
                 }
             </style>
 
@@ -32375,16 +32339,15 @@ class AppHeader extends (0, _lit.LitElement) {
 
                 <nav class="app-header-nav">
                     <ul>
-                        <li><a class="nav-item" href="#home">Home</a></li>
-                        <li><a class="nav-item" href="#events">Events</a></li>
-                        <li><a class="nav-item" href="#venue">Venue</a></li>
-                        <li><a class="nav-item" href="#about">About</a></li>
+                        <li class="nav-item"><a href="#home">Home</a></li>
+                        <li class="nav-item"><a href="#events">Events</a></li>
+                        <li class="nav-item"><a href="#venue">Venue</a></li>
+                        <li class="nav-item"><a href="#about">About</a></li>
                     </ul>
                 </nav>
                 
                 <div class="app-header-right">
-                    <div><h2 style="font-family: var(--base-font-family)">Geelong</h2></div>
-                    <div><h2 style="font-family: var(--sub-font-family)">2024</h2></div>
+                    <img src="https://dummyimage.com/200/a19ca1/ffffff.png&text=placeholder" alt="" height="100%">
                 </div>
 
             </header>
@@ -32393,7 +32356,7 @@ class AppHeader extends (0, _lit.LitElement) {
 }
 customElements.define("sc-app-header", AppHeader);
 
-},{"lit":"4antt"}],"gpsI5":[function() {},{}],"km3Ru":[function(require,module,exports) {
+},{"lit":"4antt"}],"km3Ru":[function(require,module,exports) {
 "use strict";
 var Refresh = require("7422ead32dcc1e6b");
 function debounce(func, delay) {
@@ -32531,6 +32494,6 @@ function registerExportsForReactRefresh(module1) {
     }
 }
 
-},{"7422ead32dcc1e6b":"786KC"}]},["farZc","1xC6H","8lqZg"], "8lqZg", "parcelRequiree1b3")
+},{"7422ead32dcc1e6b":"786KC"}],"gpsI5":[function() {},{}]},["farZc","1xC6H","8lqZg"], "8lqZg", "parcelRequiree1b3")
 
 //# sourceMappingURL=index.975ef6c8.js.map
