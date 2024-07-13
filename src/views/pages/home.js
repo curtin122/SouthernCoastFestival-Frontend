@@ -9,7 +9,6 @@ import Toast from '../../Toast'
 import * as React from 'react'
 import { renderReactComponent } from '../../components/react/reactHelper'
 import eventCard from '../../components/react/sc-event-card'
-import { Button } from '@mui/material'
 
 class HomeView {
   init(){
@@ -48,15 +47,31 @@ class HomeView {
 
         <div id="filter-container">
           <div id="sections-container">
-            <Button>Eat + Drink</Button>
-            <Button>Entertainment</Button>
-            <Button>Shop</Button>
+            <button class="section-button">Eat + Drink</button>
+            <button class="section-button">Entertainment</button>
+            <button class="section-button">Shop</button>
+          </div>
+          <div id="tag-container">
+            <button class="tag-button">All</button>
+            <button class="tag-button">Drinks</button>
+            <button class="tag-button">Food</button>
+            <button class="tag-button">Alcholic</button>
+            <button class="tag-button">Gluten Free</button>
+            <button class="tag-button">Nut Free</button>
+            <button class="tag-button">Gourmet</button>
+            <button class="tag-button">
+              <span class="material-icons">favorite_border</span>
+              Favourites
+            </button>
+            <!-- <button class="tag-button"></button> -->
+            <p class="message">Showing all __ items</p>
           </div>
         </div>
-
-        <div id="card-container"></div>
-
         <div class="events-grid">
+          <div id="card-container"></div>
+        </div>
+
+        <div class="event-grid">
           ${this.events == null ? html`
               <Skeleton variant="rectangular" width={210} height={118} />
             ` : html`

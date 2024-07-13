@@ -2,9 +2,9 @@
 
 // EVENT CARD --------------------------------------
 .event-card {
-    max-width: 40%;
-    min-width: 200px;
+    max-width: 24%;
     background-color: #2b2b2b !important;
+    min-height: 200px;
 
     .event-content {
         padding: 0;
@@ -57,4 +57,25 @@
             width: 24px;
         }
     }
+    .event-button:hover, .event-button.active {
+        .material-icons {
+            color: #FFC600;
+            cursor: pointer;
+        }
+    }
+}
+
+// RESPONSIVE - TABLET ---------------------------------
+@media all and (max-width: 768px) {
+    .event-card {
+        max-width: 32%;
+    }
+}
+
+// RESPONSIVE - MOBILE --------------------------------------
+@media all and (max-width: 400px) {
+    .event-card {
+        min-width: 49%;
+        margin: 0 0.5em;
+    } 
 }

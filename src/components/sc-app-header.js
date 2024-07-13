@@ -128,6 +128,10 @@ class AppHeader extends LitElement {
                         margin: 0;
                     }
                 }
+
+                // tablet
+
+                // mobile
             </style>
 
             <header class="app-header">
