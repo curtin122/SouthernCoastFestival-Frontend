@@ -58,7 +58,7 @@ class AppHeader extends LitElement {
                 }
 
                 .app-header {
-                    height: 8.5em;
+                    height: var(--app-header-height);
                     background-color: #000000;
                     border-bottom: 0.2em solid #FFC600;
 
@@ -66,6 +66,7 @@ class AppHeader extends LitElement {
                     flex-direction: row;
                     justify-content: space-between;
                     align-items: center;
+                    z-index: 10;
                 }
                 .app-header-left {
                     width: 6.5em;
