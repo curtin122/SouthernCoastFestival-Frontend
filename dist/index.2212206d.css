@@ -108,6 +108,7 @@
   display: flex;
 }
 
+<<<<<<< Updated upstream
 #filter-container #sections-container .section-button {
   font-family: var(--base-font-family);
   background-color: #bdbdbd;
@@ -189,6 +190,8 @@
   }
 }
 
+=======
+>>>>>>> Stashed changes
 @font-face {
   font-family: Athelas;
   src: url("Athelas-Regular.a991a457.ttf");
