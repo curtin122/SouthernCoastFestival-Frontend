@@ -5739,7 +5739,7 @@ class App {
 }
 exports.default = new App();
 
-},{"./Router":"kOSdl","./Auth":"wuqrX","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./Event":"cqvk6"}],"kOSdl":[function(require,module,exports) {
+},{"./Router":"kOSdl","./Auth":"wuqrX","./Toast":"4N7Ir","./Event":"cqvk6","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kOSdl":[function(require,module,exports) {
 // import views
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -5825,6 +5825,8 @@ class HomeView {
         document.title = "Home";
         this.render();
         (0, _utilsDefault.default).pageIntroAnim();
+        const jumpTo = document.getElementById("jumpTo");
+        jumpTo.addEventListener("click", this.scrollTo);
     }
     async getEvents() {
         try {
@@ -5835,6 +5837,13 @@ class HomeView {
             (0, _toastDefault.default).show(err, "error");
         }
     }
+    scrollTo() {
+        const eventsSection = document.getElementById("events");
+        eventsSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
     render() {
         const template = (0, _litHtml.html)`
 
@@ -5843,59 +5852,75 @@ class HomeView {
       <div class="page-content">        
         
         <!--HERO-->
-        <div class="hero-banner">
-          <div id="hero-content">
-
+        <div id="home">
+          <div class="hero-banner">
+            <div id="hero-content">
+              <h1>Watch the Light Show</h1>
+              <p>Come along to see Geelong's least kept secret, the Festival of Lights</p>
+              <p>Over 2,000 bulbs and neons to light up your imagination</p>
+              <button id="jumpTo">Find an event</button>
+            </div>
           </div>
         </div>
 
         <!--EVENTS-->
         <!-- use react grid to create events layout -->
 
-        <div id="filter-container">
-          <div id="sections-container">
-            <button class="section-button">Eat + Drink</button>
-            <button class="section-button">Entertainment</button>
-            <button class="section-button">Shop</button>
+        <div id="events">
+          <div id="filter-container">
+            <!--MAIN FILTERS-->
+            <div id="sections-container">
+              <button class="section-button">Eat + Drink</button>
+              <button class="section-button">Entertainment</button>
+              <button class="section-button">Shop</button>
+            </div>
+            <!--TAGS-->
+            <div id="tag-container">
+              <button class="tag-button">All</button>
+              <button class="tag-button">Drinks</button>
+              <button class="tag-button">Food</button>
+              <button class="tag-button">Alcholic</button>
+              <button class="tag-button">Gluten Free</button>
+              <button class="tag-button">Nut Free</button>
+              <button class="tag-button">Gourmet</button>
+              <button class="tag-button">
+                <span class="material-icons">favorite_border</span>
+                Favourites
+              </button>
+              <!-- <button class="tag-button"></button> -->
+              <p class="message">Showing all __ items</p>
+            </div>
           </div>
-          <div id="tag-container">
-            <button class="tag-button">All</button>
-            <button class="tag-button">Drinks</button>
-            <button class="tag-button">Food</button>
-            <button class="tag-button">Alcholic</button>
-            <button class="tag-button">Gluten Free</button>
-            <button class="tag-button">Nut Free</button>
-            <button class="tag-button">Gourmet</button>
-            <button class="tag-button">
-              <span class="material-icons">favorite_border</span>
-              Favourites
-            </button>
-            <!-- <button class="tag-button"></button> -->
-            <p class="message">Showing all __ items</p>
+          <div class="events-grid">
+            <div id="card-container"></div>
           </div>
-        </div>
-        <div class="events-grid">
-          <div id="card-container"></div>
-        </div>
 
-        <div class="event-grid">
-          ${this.events == null ? (0, _litHtml.html)`
-              <Skeleton variant="rectangular" width={210} height={118} />
-            ` : (0, _litHtml.html)`
-              ${this.events.map((event)=>(0, _litHtml.html)`
-                <sc-event class="event-card"
-                  name="${event.name}",
-                  description="${event.description}",
-                  image="${event.image}",
-                  length="${event.length}",
-                  artist="${event.artist}"
-              `)}
-            `}
+          <!--EVENTS-->
+          <div class="event-grid">
+            ${this.events == null ? (0, _litHtml.html)`
+                <Skeleton variant="rectangular" width={210} height={118} />
+              ` : (0, _litHtml.html)`
+                ${this.events.map((event)=>(0, _litHtml.html)`
+                  <sc-event class="event-card"
+                    name="${event.name}",
+                    description="${event.description}",
+                    image="${event.image}",
+                    length="${event.length}",
+                    artist="${event.artist}"
+                `)}
+              `}
+          </div>
         </div>
 
         <!--VENUE-->
+        <div id="venue">
+
+        </div>
 
         <!--ABOUT-->
+        <div id="about">
+
+        </div>
         
       </div>      
     `;
@@ -5911,7 +5936,7 @@ exports.default = new HomeView();
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"../../App":"2kQhy","lit-html":"1cmQt","../../Router":"kOSdl","../../Auth":"wuqrX","../../Utils":"iRY6S","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../Toast":"4N7Ir","../../Event":"cqvk6","react":"21dqq","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../components/react/reactHelper":"3QXBS","../../components/react/sc-event-card":"8huJy"}],"1cmQt":[function(require,module,exports) {
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Router":"kOSdl","../../Auth":"wuqrX","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/react/sc-event-card":"8huJy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1cmQt":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2017 Google LLC
@@ -10803,145 +10828,7 @@ class Event {
 }
 exports.default = new Event();
 
-},{"./App":"2kQhy","./Router":"kOSdl","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"km3Ru":[function(require,module,exports) {
-"use strict";
-var Refresh = require("7422ead32dcc1e6b");
-function debounce(func, delay) {
-    {
-        let timeout = undefined;
-        let lastTime = 0;
-        return function(args) {
-            // Call immediately if last call was more than the delay ago.
-            // Otherwise, set a timeout. This means the first call is fast
-            // (for the common case of a single update), and subsequent updates
-            // are batched.
-            let now = Date.now();
-            if (now - lastTime > delay) {
-                lastTime = now;
-                func.call(null, args);
-            } else {
-                clearTimeout(timeout);
-                timeout = setTimeout(function() {
-                    timeout = undefined;
-                    lastTime = Date.now();
-                    func.call(null, args);
-                }, delay);
-            }
-        };
-    }
-}
-var enqueueUpdate = debounce(function() {
-    Refresh.performReactRefresh();
-}, 30);
-// Everthing below is either adapted or copied from
-// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
-// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
-module.exports.prelude = function(module1) {
-    window.$RefreshReg$ = function(type, id) {
-        Refresh.register(type, module1.id + " " + id);
-    };
-    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
-};
-module.exports.postlude = function(module1) {
-    if (isReactRefreshBoundary(module1.exports)) {
-        registerExportsForReactRefresh(module1);
-        if (module1.hot) {
-            module1.hot.dispose(function(data) {
-                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
-                data.prevExports = module1.exports;
-            });
-            module1.hot.accept(function(getParents) {
-                var prevExports = module1.hot.data.prevExports;
-                var nextExports = module1.exports;
-                // Since we just executed the code for it, it's possible
-                // that the new exports make it ineligible for being a boundary.
-                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports);
-                // It can also become ineligible if its exports are incompatible
-                // with the previous exports.
-                // For example, if you add/remove/change exports, we'll want
-                // to re-execute the importing modules, and force those components
-                // to re-render. Similarly, if you convert a class component
-                // to a function, we want to invalidate the boundary.
-                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
-                if (isNoLongerABoundary || didInvalidate) {
-                    // We'll be conservative. The only case in which we won't do a full
-                    // reload is if all parent modules are also refresh boundaries.
-                    // In that case we'll add them to the current queue.
-                    var parents = getParents();
-                    if (parents.length === 0) {
-                        // Looks like we bubbled to the root. Can't recover from that.
-                        window.location.reload();
-                        return;
-                    }
-                    return parents;
-                }
-                enqueueUpdate();
-            });
-        }
-    }
-};
-function isReactRefreshBoundary(exports) {
-    if (Refresh.isLikelyComponentType(exports)) return true;
-    if (exports == null || typeof exports !== "object") // Exit if we can't iterate over exports.
-    return false;
-    var hasExports = false;
-    var areAllExportsComponents = true;
-    let isESM = "__esModule" in exports;
-    for(var key in exports){
-        hasExports = true;
-        if (key === "__esModule") continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
-        return false;
-        var exportValue = exports[key];
-        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
-    }
-    return hasExports && areAllExportsComponents;
-}
-function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
-    var prevSignature = getRefreshBoundarySignature(prevExports);
-    var nextSignature = getRefreshBoundarySignature(nextExports);
-    if (prevSignature.length !== nextSignature.length) return true;
-    for(var i = 0; i < nextSignature.length; i++){
-        if (prevSignature[i] !== nextSignature[i]) return true;
-    }
-    return false;
-}
-// When this signature changes, it's unsafe to stop at this refresh boundary.
-function getRefreshBoundarySignature(exports) {
-    var signature = [];
-    signature.push(Refresh.getFamilyByType(exports));
-    if (exports == null || typeof exports !== "object") // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return signature;
-    let isESM = "__esModule" in exports;
-    for(var key in exports){
-        if (key === "__esModule") continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        signature.push(key);
-        signature.push(Refresh.getFamilyByType(exportValue));
-    }
-    return signature;
-}
-function registerExportsForReactRefresh(module1) {
-    var exports = module1.exports, id = module1.id;
-    Refresh.register(exports, id + " %exports%");
-    if (exports == null || typeof exports !== "object") // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return;
-    let isESM = "__esModule" in exports;
-    for(var key in exports){
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        var typeID = id + " %exports% " + key;
-        Refresh.register(exportValue, typeID);
-    }
-}
-
-},{"7422ead32dcc1e6b":"786KC"}],"3QXBS":[function(require,module,exports) {
+},{"./App":"2kQhy","./Router":"kOSdl","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3QXBS":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$08ff = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -10968,7 +10855,7 @@ const renderReactComponent = (Component, container)=>{
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-dom/client":"lOjBx"}],"lOjBx":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-dom/client":"lOjBx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lOjBx":[function(require,module,exports) {
 "use strict";
 var m = require("aaccff5d309d9239");
 var i = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
@@ -32492,7 +32379,145 @@ module.exports = require("ef03b89c8fe2794e");
     /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop === "function") __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
 })();
 
-},{}],"8huJy":[function(require,module,exports) {
+},{}],"km3Ru":[function(require,module,exports) {
+"use strict";
+var Refresh = require("7422ead32dcc1e6b");
+function debounce(func, delay) {
+    {
+        let timeout = undefined;
+        let lastTime = 0;
+        return function(args) {
+            // Call immediately if last call was more than the delay ago.
+            // Otherwise, set a timeout. This means the first call is fast
+            // (for the common case of a single update), and subsequent updates
+            // are batched.
+            let now = Date.now();
+            if (now - lastTime > delay) {
+                lastTime = now;
+                func.call(null, args);
+            } else {
+                clearTimeout(timeout);
+                timeout = setTimeout(function() {
+                    timeout = undefined;
+                    lastTime = Date.now();
+                    func.call(null, args);
+                }, delay);
+            }
+        };
+    }
+}
+var enqueueUpdate = debounce(function() {
+    Refresh.performReactRefresh();
+}, 30);
+// Everthing below is either adapted or copied from
+// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
+// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
+module.exports.prelude = function(module1) {
+    window.$RefreshReg$ = function(type, id) {
+        Refresh.register(type, module1.id + " " + id);
+    };
+    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
+};
+module.exports.postlude = function(module1) {
+    if (isReactRefreshBoundary(module1.exports)) {
+        registerExportsForReactRefresh(module1);
+        if (module1.hot) {
+            module1.hot.dispose(function(data) {
+                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
+                data.prevExports = module1.exports;
+            });
+            module1.hot.accept(function(getParents) {
+                var prevExports = module1.hot.data.prevExports;
+                var nextExports = module1.exports;
+                // Since we just executed the code for it, it's possible
+                // that the new exports make it ineligible for being a boundary.
+                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports);
+                // It can also become ineligible if its exports are incompatible
+                // with the previous exports.
+                // For example, if you add/remove/change exports, we'll want
+                // to re-execute the importing modules, and force those components
+                // to re-render. Similarly, if you convert a class component
+                // to a function, we want to invalidate the boundary.
+                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
+                if (isNoLongerABoundary || didInvalidate) {
+                    // We'll be conservative. The only case in which we won't do a full
+                    // reload is if all parent modules are also refresh boundaries.
+                    // In that case we'll add them to the current queue.
+                    var parents = getParents();
+                    if (parents.length === 0) {
+                        // Looks like we bubbled to the root. Can't recover from that.
+                        window.location.reload();
+                        return;
+                    }
+                    return parents;
+                }
+                enqueueUpdate();
+            });
+        }
+    }
+};
+function isReactRefreshBoundary(exports) {
+    if (Refresh.isLikelyComponentType(exports)) return true;
+    if (exports == null || typeof exports !== "object") // Exit if we can't iterate over exports.
+    return false;
+    var hasExports = false;
+    var areAllExportsComponents = true;
+    let isESM = "__esModule" in exports;
+    for(var key in exports){
+        hasExports = true;
+        if (key === "__esModule") continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
+        return false;
+        var exportValue = exports[key];
+        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
+    }
+    return hasExports && areAllExportsComponents;
+}
+function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
+    var prevSignature = getRefreshBoundarySignature(prevExports);
+    var nextSignature = getRefreshBoundarySignature(nextExports);
+    if (prevSignature.length !== nextSignature.length) return true;
+    for(var i = 0; i < nextSignature.length; i++){
+        if (prevSignature[i] !== nextSignature[i]) return true;
+    }
+    return false;
+}
+// When this signature changes, it's unsafe to stop at this refresh boundary.
+function getRefreshBoundarySignature(exports) {
+    var signature = [];
+    signature.push(Refresh.getFamilyByType(exports));
+    if (exports == null || typeof exports !== "object") // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return signature;
+    let isESM = "__esModule" in exports;
+    for(var key in exports){
+        if (key === "__esModule") continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        signature.push(key);
+        signature.push(Refresh.getFamilyByType(exportValue));
+    }
+    return signature;
+}
+function registerExportsForReactRefresh(module1) {
+    var exports = module1.exports, id = module1.id;
+    Refresh.register(exports, id + " %exports%");
+    if (exports == null || typeof exports !== "object") // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return;
+    let isESM = "__esModule" in exports;
+    for(var key in exports){
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        var typeID = id + " %exports% " + key;
+        Refresh.register(exportValue, typeID);
+    }
+}
+
+},{"7422ead32dcc1e6b":"786KC"}],"8huJy":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$94a6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -32859,9 +32884,9 @@ exports.default = eventCard;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../scss/react.scss":"aLSRg","../../../static/images/chef-bryan-entertainment.jpg":"aMs6C"}],"40376":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../../../static/images/chef-bryan-entertainment.jpg":"aMs6C","../../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"40376":[function(require,module,exports) {
 /**
- * @mui/material v5.16.0
+ * @mui/material v5.16.1
  *
  * @license MIT
  * This source code is licensed under the MIT license found in the
@@ -33717,7 +33742,7 @@ function experimental_sx() {
 
 },{"@mui/utils/formatMuiErrorMessage":"7QIu9","@mui/styled-engine":"eTow5","./GlobalStyles":false,"./borders":false,"./breakpoints":false,"./compose":false,"./display":false,"./flexbox":false,"./cssGrid":false,"./palette":false,"./positions":false,"./shadows":false,"./sizing":false,"./spacing":false,"./style":false,"./typography":false,"./styleFunctionSx":false,"./getThemeValue":false,"./Box":false,"./createBox":"bc03s","./createStyled":false,"./styled":false,"./createTheme":false,"./createTheme/createBreakpoints":false,"./createTheme/createSpacing":false,"./createTheme/shape":false,"./useThemeProps":false,"./useTheme":"h9QTR","./useThemeWithoutDefault":false,"./useMediaQuery":false,"./colorManipulator":false,"./ThemeProvider":false,"./cssVars/createCssVarsProvider":false,"./cssVars/createGetCssVar":false,"./cssVars/cssVarsParser":false,"./cssVars/prepareCssVars":false,"./cssVars/createCssVarsTheme":false,"./responsivePropType":false,"./RtlProvider":false,"./Container/createContainer":false,"./Container":false,"./Unstable_Grid/Grid":false,"./Unstable_Grid":false,"./Stack/Stack":false,"./Stack":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eTow5":[function(require,module,exports) {
 /**
- * @mui/styled-engine v5.15.14
+ * @mui/styled-engine v5.16.1
  *
  * @license MIT
  * This source code is licensed under the MIT license found in the
@@ -39448,7 +39473,7 @@ function _objectWithoutPropertiesLoose(r, e) {
     if (null == r) return {};
     var t = {};
     for(var n in r)if (({}).hasOwnProperty.call(r, n)) {
-        if (e.indexOf(n) >= 0) continue;
+        if (e.includes(n)) continue;
         t[n] = r[n];
     }
     return t;
@@ -41299,7 +41324,7 @@ function _objectWithoutPropertiesLoose(r, e) {
     if (null == r) return {};
     var t = {};
     for(var n in r)if (({}).hasOwnProperty.call(r, n)) {
-        if (e.indexOf(n) >= 0) continue;
+        if (e.includes(n)) continue;
         t[n] = r[n];
     }
     return t;
@@ -41631,7 +41656,7 @@ var _utils = require("@mui/utils");
 
 },{"@mui/utils":"iivny","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iivny":[function(require,module,exports) {
 /**
- * @mui/utils v5.16.0
+ * @mui/utils v5.16.1
  *
  * @license MIT
  * This source code is licensed under the MIT license found in the
@@ -44872,7 +44897,7 @@ const typographyClasses = (0, _generateUtilityClassesDefault.default)("MuiTypogr
 ]);
 exports.default = typographyClasses;
 
-},{"@mui/utils/generateUtilityClasses":"7eO93","@mui/utils/generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aLSRg":[function() {},{}],"aMs6C":[function(require,module,exports) {
+},{"@mui/utils/generateUtilityClasses":"7eO93","@mui/utils/generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aMs6C":[function(require,module,exports) {
 module.exports = require("d17ce4a2d8f98711").getBundleURL("bLxZJ") + "chef-bryan-entertainment.079a5731.jpg" + "?" + Date.now();
 
 },{"d17ce4a2d8f98711":"lgJ39"}],"lgJ39":[function(require,module,exports) {
@@ -44910,7 +44935,7 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"BO0AV":[function(require,module,exports) {
+},{}],"aLSRg":[function() {},{}],"BO0AV":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _app = require("../../App");
@@ -44966,6 +44991,7 @@ class AppHeader extends (0, _lit.LitElement) {
     }
     firstUpdated() {
         this.navActiveLinks();
+        this.scrollTo();
     }
     navActiveLinks() {
         const links = this.shadowRoot.querySelectorAll(".nav-item");
@@ -44974,6 +45000,20 @@ class AppHeader extends (0, _lit.LitElement) {
                 event.preventDefault();
                 links.forEach((link)=>link.classList.remove("active"));
                 event.currentTarget.classList.add("active");
+            });
+        });
+    }
+    scrollTo() {
+        const links = this.shadowRoot.querySelectorAll(".nav-item");
+        links.forEach((link)=>{
+            link.addEventListener("click", (event)=>{
+                event.preventDefault();
+                const targetId = link.getAttribute("href").substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) targetElement.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
             });
         });
     }
@@ -45011,6 +45051,9 @@ class AppHeader extends (0, _lit.LitElement) {
                     justify-content: space-between;
                     align-items: center;
                     z-index: 10;
+
+                    position: sticky;
+                    top: 0;
                 }
                 .app-header-left {
                     width: 6.5em;

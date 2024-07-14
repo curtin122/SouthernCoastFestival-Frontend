@@ -19,6 +19,7 @@ class AppHeader extends LitElement {
 
     firstUpdated() {
         this.navActiveLinks();
+        this.scrollTo();
     }
 
     navActiveLinks() {
@@ -29,6 +30,21 @@ class AppHeader extends LitElement {
                 event.preventDefault()
                 links.forEach(link => link.classList.remove('active'))
                 event.currentTarget.classList.add('active')
+            })
+        })
+    }
+
+    scrollTo() {
+        const links = this.shadowRoot.querySelectorAll('.nav-item')
+
+        links.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault()
+                const targetId = link.getAttribute('href').substring(1)
+                const targetElement = document.getElementById(targetId)
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
             })
         })
     }
@@ -67,6 +83,9 @@ class AppHeader extends LitElement {
                     justify-content: space-between;
                     align-items: center;
                     z-index: 10;
+
+                    position: sticky;
+                    top: 0;
                 }
                 .app-header-left {
                     width: 6.5em;
