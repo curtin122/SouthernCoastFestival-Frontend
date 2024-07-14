@@ -13,6 +13,7 @@ function NavigationBar() {
 
 // components
 import './components/sc-app-header'
+import './components/sc-app-footer'
 
 // styles
 import './scss/master.scss'

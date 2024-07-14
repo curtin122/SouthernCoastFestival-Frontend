@@ -17,8 +17,8 @@ class HomeView {
     this.render()    
     Utils.pageIntroAnim()
 
-    const jumpTo = document.getElementById('jumpTo')
-    jumpTo.addEventListener('click', this.scrollTo)
+    const jumpTo = document.querySelectorAll('jumpTo')
+    jumpTo.forEach(button => button.addEventListener('click', this.scrollTo))
   }
 
   async getEvents() {
@@ -50,7 +50,7 @@ class HomeView {
               <h1>Watch the Light Show</h1>
               <p>Come along to see Geelong's least kept secret, the Festival of Lights</p>
               <p>Over 2,000 bulbs and neons to light up your imagination</p>
-              <button id="jumpTo">Find an event</button>
+              <button class="jumpTo">Find an event</button>
             </div>
           </div>
         </div>
@@ -106,15 +106,71 @@ class HomeView {
 
         <!--VENUE-->
         <div id="venue">
-
+            <div class="venue-nav">
+              <ul>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#map">Festival Map</a></li>
+                <li><a href="#accessibility">Accessibility</a></li>
+                <li><a href="#parking">Parking</a></li>
+                <li><a href="#transport">Transport</a></li>
+              </ul>
+            </div>
+            <div class="venue-container">
+              <div id="location">
+                <div class="left">
+                  <h1>Location</h1>
+                  <p>Rippleside Park, Bell Parade Geelong, Victoria, Australia</p>
+                </div>
+                <div class="right">
+                  <div id="loc-img"></div>
+                </div>
+              </div>
+              <div id="map">
+                <div id="map-img"></div>
+                <h1>Festival Map</h1>
+              </div>
+              <div id="accessibility">
+                <h1>Accessibility</h1>
+                <p>Lorem ipsum</p>
+              </div>
+              <div id="parking">
+                <h1>Parking</h1>
+                <p>Lorem ipsum</p>
+              </div>
+              <div id="transport">
+                <h1>Transport</h1>
+                <p>Lorem ipsum</p>
+              </div>
+            </div>
         </div>
 
         <!--ABOUT-->
         <div id="about">
-
+          <div class="about-container">
+            <table>
+              <tr>
+                <td>
+                  <h1>About the Festival</h1>
+                  <p>The 2024 Geelong based Southern Coast Festival of Lights celebrates its second year. Its sponsors and volunteers want you to have a great time, and made the festival twice as fun as last year's.</p>
+                  <p>Come and help us celebrate our local art and food!</p>
+                  <h2>Hours of Operation</h2>
+                  <p>9 am to midnight on Saturday, 24 August 2024</p>
+                  <p>9 am to 10pm on Sunday, 25 August 2024</p>
+                </td>
+                <td>
+                  <div id="about-img"></div>  
+                </td>
+              </tr>
+              <tr>
+                <td><button>Contact us</button></td>
+                <td><button class="jumpTo">Find an event</button></td>
+              </tr>
+            </table>
+          </div>
         </div>
-        
-      </div>      
+      </div>   
+      
+      <sc-app-footer></sc-app-footer>
     `
     render(template, App.rootEl)
 
