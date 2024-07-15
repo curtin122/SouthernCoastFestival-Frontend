@@ -2989,7 +2989,7 @@ $RefreshReg$(_c, "NavigationBar");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./App":"2kQhy","react-dom/client":"lOjBx","./components/sc-app-header":"kDC1R","./scss/master.scss":"gpsI5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/sc-app-footer":"eSeCb"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./App":"2kQhy","react-dom/client":"lOjBx","./components/sc-app-header":"kDC1R","./components/sc-app-footer":"eSeCb","./scss/master.scss":"gpsI5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iTorj":[function(require,module,exports) {
 "use strict";
 module.exports = require("ee51401569654d91");
 
@@ -5814,6 +5814,8 @@ var _utils = require("../../Utils");
 var _utilsDefault = parcelHelpers.interopDefault(_utils);
 var _event = require("../../Event");
 var _eventDefault = parcelHelpers.interopDefault(_event);
+var _userAPI = require("../../UserAPI");
+var _userAPIDefault = parcelHelpers.interopDefault(_userAPI);
 var _toast = require("../../Toast");
 var _toastDefault = parcelHelpers.interopDefault(_toast);
 var _react = require("react");
@@ -5897,20 +5899,7 @@ class HomeView {
           </div>
 
           <!--EVENTS-->
-          <div class="event-grid">
-            ${this.events == null ? (0, _litHtml.html)`
-                <Skeleton variant="rectangular" width={210} height={118} />
-              ` : (0, _litHtml.html)`
-                ${this.events.map((event)=>(0, _litHtml.html)`
-                  <sc-event class="event-card"
-                    name="${event.name}",
-                    description="${event.description}",
-                    image="${event.image}",
-                    length="${event.length}",
-                    artist="${event.artist}"
-                `)}
-              `}
-          </div>
+         
         </div>
 
         <!--VENUE-->
@@ -5993,7 +5982,7 @@ exports.default = new HomeView();
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"../../App":"2kQhy","lit-html":"1cmQt","../../Router":"kOSdl","../../Auth":"wuqrX","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/react/sc-event-card":"8huJy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1cmQt":[function(require,module,exports) {
+},{"../../App":"2kQhy","lit-html":"1cmQt","../../Router":"kOSdl","../../Auth":"wuqrX","../../Utils":"iRY6S","../../Event":"cqvk6","../../Toast":"4N7Ir","react":"21dqq","../../components/react/reactHelper":"3QXBS","../../components/react/sc-event-card":"8huJy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../UserAPI":"e78rv"}],"1cmQt":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2017 Google LLC
@@ -10853,18 +10842,19 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _app = require("./App");
 var _appDefault = parcelHelpers.interopDefault(_app);
-var _router = require("./Router");
-var _routerDefault = parcelHelpers.interopDefault(_router);
+var _auth = require("./Auth");
+var _authDefault = parcelHelpers.interopDefault(_auth);
 var _toast = require("./Toast");
 var _toastDefault = parcelHelpers.interopDefault(_toast);
 class Event {
     constructor(){
         this.currentUser = {};
+        console.log("Event instance created");
+        console.log(this.currentUser);
     }
     async getEvents() {
         // fetch json data
-        const response = await fetch(`${(0, _appDefault.default).apiBase}/events/events`, {
-            method: "GET",
+        const response = await fetch(`${(0, _appDefault.default).apiBase}/events`, {
             headers: {
                 "Authorization": `Bearer ${localStorage.accessToken}`
             }
@@ -10875,7 +10865,7 @@ class Event {
             const err = await response.json();
             if (err) console.log(err);
             // throw error (exit function)
-            throw new Error("Problem getting events");
+            throw new Error("Problem getting events - frontend Events.j");
         }
         // convert payload into json - store as data
         const data = await response.json();
@@ -10885,7 +10875,7 @@ class Event {
 }
 exports.default = new Event();
 
-},{"./App":"2kQhy","./Router":"kOSdl","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3QXBS":[function(require,module,exports) {
+},{"./App":"2kQhy","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./Auth":"wuqrX"}],"3QXBS":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$08ff = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -32585,363 +32575,108 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
 var _material = require("@mui/material");
 var _chefBryanEntertainmentJpg = require("../../../static/images/chef-bryan-entertainment.jpg");
 var _chefBryanEntertainmentJpgDefault = parcelHelpers.interopDefault(_chefBryanEntertainmentJpg);
-var _reactScss = require("../../scss/react.scss");
+var _reactScss = require("./../../scss/react.scss");
+var _app = require("./../../App");
+var _appDefault = parcelHelpers.interopDefault(_app);
+var _event = require("./../../Event");
+var _eventDefault = parcelHelpers.interopDefault(_event);
 var _s = $RefreshSig$();
-const eventCard = ()=>{
+console.log("in sc event card");
+const scEventCard = ()=>{
     _s();
-    const [isActive, setActive] = (0, _react.useState)(false);
-    const handleButtonClick = ()=>{
-        setIsActive(!isActive);
-    };
+    const [festivalevents, setFestivalevents] = (0, _react.useState)([]); //useState hook to create a state variable named festivalevents with initial value of empty array
+    (0, _react.useEffect)(()=>{
+        fetch(`${(0, _appDefault.default).apiBase}/public/events`) // Adjust the URL based on your setup
+        .then((res)=>res.json()).then((data)=>{
+            if (Array.isArray(data)) {
+                console.log(data);
+                setFestivalevents(data);
+            } else console.error("Data is not an array:", data);
+        }).catch((error)=>console.error("Fetch error:", error));
+    }, []);
+    console.log(festivalevents);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
+        children: festivalevents.map((event)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
                 className: "event-card",
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardContent), {
-                    className: "event-content",
-                    children: [
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardMedia), {
-                            component: "img",
-                            alt: "placeholder",
-                            height: "150",
-                            image: (0, _chefBryanEntertainmentJpgDefault.default),
-                            className: "event-image"
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardHeader), {
+                        title: event.eventdisplayname,
+                        subheader: event.eventoperationdatetimestart
+                    }, void 0, false, {
+                        fileName: "src/components/react/sc-event-card.js",
+                        lineNumber: 31,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardMedia), {
+                        component: "img",
+                        height: "194",
+                        image: event.eventimage,
+                        alt: event.eventdisplayname
+                    }, void 0, false, {
+                        fileName: "src/components/react/sc-event-card.js",
+                        lineNumber: 35,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardContent), {
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
+                            variant: "body2",
+                            color: "text.secondary",
+                            children: event.eventdescription
                         }, void 0, false, {
                             fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 18,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
-                            className: "event-title-box",
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                                    className: "event-title",
-                                    children: "Chef Bryan"
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 25,
-                                    columnNumber: 21
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
-                                    className: "event-button",
-                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        className: "material-icons",
-                                        children: "favorite_border"
-                                    }, void 0, false, {
-                                        fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 29,
-                                        columnNumber: 25
-                                    }, undefined)
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 28,
-                                    columnNumber: 21
-                                }, undefined)
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 24,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-description",
-                            children: "Watch past MasterChef contestant Bryan cook up a storm at the stage"
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 34,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-times",
-                            children: [
-                                "Sat \u2014 19:00-19:45",
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 38,
-                                    columnNumber: 38
-                                }, undefined),
-                                "Sun \u2014 19:00-19:45"
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 37,
-                            columnNumber: 17
+                            lineNumber: 42,
+                            columnNumber: 13
                         }, undefined)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/react/sc-event-card.js",
-                    lineNumber: 17,
-                    columnNumber: 13
-                }, undefined)
-            }, void 0, false, {
-                fileName: "src/components/react/sc-event-card.js",
-                lineNumber: 16,
-                columnNumber: 9
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
-                className: "event-card",
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardContent), {
-                    className: "event-content",
-                    children: [
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardMedia), {
-                            component: "img",
-                            alt: "placeholder",
-                            height: "150",
-                            image: (0, _chefBryanEntertainmentJpgDefault.default),
-                            className: "event-image"
+                    }, void 0, false, {
+                        fileName: "src/components/react/sc-event-card.js",
+                        lineNumber: 41,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
+                        sx: {
+                            display: "flex",
+                            justifyContent: "flex-end"
+                        },
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
+                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Badge), {
+                                badgeContent: event.likes,
+                                color: "primary"
+                            }, void 0, false, {
+                                fileName: "src/components/react/sc-event-card.js",
+                                lineNumber: 48,
+                                columnNumber: 15
+                            }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 45,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
-                            className: "event-title-box",
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                                    className: "event-title",
-                                    children: "Light Experience Room"
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 52,
-                                    columnNumber: 21
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
-                                    className: "event-button",
-                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        className: "material-icons",
-                                        children: "favorite_border"
-                                    }, void 0, false, {
-                                        fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 56,
-                                        columnNumber: 25
-                                    }, undefined)
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 55,
-                                    columnNumber: 21
-                                }, undefined)
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 51,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-description",
-                            children: "Where art and lights meet! Enjoy a 20 min light art experience. Two shows every hour. Entry is $5 per person."
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 61,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-times",
-                            children: [
-                                "Sat \u2014 19:00-19:45",
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 65,
-                                    columnNumber: 38
-                                }, undefined),
-                                "Sun \u2014 19:00-19:45"
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 64,
-                            columnNumber: 17
+                            lineNumber: 47,
+                            columnNumber: 13
                         }, undefined)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/react/sc-event-card.js",
-                    lineNumber: 44,
-                    columnNumber: 13
-                }, undefined)
-            }, void 0, false, {
+                    }, void 0, false, {
+                        fileName: "src/components/react/sc-event-card.js",
+                        lineNumber: 46,
+                        columnNumber: 11
+                    }, undefined)
+                ]
+            }, event._id, true, {
                 fileName: "src/components/react/sc-event-card.js",
-                lineNumber: 43,
+                lineNumber: 30,
                 columnNumber: 9
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
-                className: "event-card",
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardContent), {
-                    className: "event-content",
-                    children: [
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardMedia), {
-                            component: "img",
-                            alt: "placeholder",
-                            height: "150",
-                            image: (0, _chefBryanEntertainmentJpgDefault.default),
-                            className: "event-image"
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 72,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
-                            className: "event-title-box",
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                                    className: "event-title",
-                                    children: "Chef Bryan"
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 79,
-                                    columnNumber: 21
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
-                                    className: "event-button",
-                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        className: "material-icons",
-                                        children: "favorite_border"
-                                    }, void 0, false, {
-                                        fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 83,
-                                        columnNumber: 25
-                                    }, undefined)
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 82,
-                                    columnNumber: 21
-                                }, undefined)
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 78,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-description",
-                            children: "Watch past MasterChef contestant Bryan cook up a storm at the stage"
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 88,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-times",
-                            children: [
-                                "Sat \u2014 19:00-19:45",
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 92,
-                                    columnNumber: 38
-                                }, undefined),
-                                "Sun \u2014 19:00-19:45"
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 91,
-                            columnNumber: 17
-                        }, undefined)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/react/sc-event-card.js",
-                    lineNumber: 71,
-                    columnNumber: 13
-                }, undefined)
-            }, void 0, false, {
-                fileName: "src/components/react/sc-event-card.js",
-                lineNumber: 70,
-                columnNumber: 9
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Card), {
-                className: "event-card",
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardContent), {
-                    className: "event-content",
-                    children: [
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.CardMedia), {
-                            component: "img",
-                            alt: "placeholder",
-                            height: "150",
-                            image: (0, _chefBryanEntertainmentJpgDefault.default),
-                            className: "event-image"
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 99,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Box), {
-                            className: "event-title-box",
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                                    className: "event-title",
-                                    children: "Light Experience Room"
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 106,
-                                    columnNumber: 21
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.IconButton), {
-                                    className: "event-button",
-                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        className: "material-icons",
-                                        children: "favorite_border"
-                                    }, void 0, false, {
-                                        fileName: "src/components/react/sc-event-card.js",
-                                        lineNumber: 110,
-                                        columnNumber: 25
-                                    }, undefined)
-                                }, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 109,
-                                    columnNumber: 21
-                                }, undefined)
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 105,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-description",
-                            children: "Where art and lights meet! Enjoy a 20 min light art experience. Two shows every hour. Entry is $5 per person."
-                        }, void 0, false, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 115,
-                            columnNumber: 17
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _material.Typography), {
-                            className: "event-times",
-                            children: [
-                                "Sat \u2014 19:00-19:45",
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                                    fileName: "src/components/react/sc-event-card.js",
-                                    lineNumber: 119,
-                                    columnNumber: 38
-                                }, undefined),
-                                "Sun \u2014 19:00-19:45"
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/react/sc-event-card.js",
-                            lineNumber: 118,
-                            columnNumber: 17
-                        }, undefined)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/react/sc-event-card.js",
-                    lineNumber: 98,
-                    columnNumber: 13
-                }, undefined)
-            }, void 0, false, {
-                fileName: "src/components/react/sc-event-card.js",
-                lineNumber: 97,
-                columnNumber: 9
-            }, undefined)
-        ]
-    }, void 0, true);
+            }, undefined))
+    }, void 0, false);
 };
-_s(eventCard, "NIDogoy7bmTp1+ctz7hxf3NMsLg=");
-exports.default = eventCard;
+_s(scEventCard, "D4KfcvqbJhb3AYk8SOSK3O6BulY=");
+exports.default = scEventCard;
 
   $parcel$ReactRefreshHelpers$94a6.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@mui/material":"40376","../../../static/images/chef-bryan-entertainment.jpg":"aMs6C","../../scss/react.scss":"aLSRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"40376":[function(require,module,exports) {
+},{"react":"21dqq","@mui/material":"40376","../../../static/images/chef-bryan-entertainment.jpg":"aMs6C","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./../../App":"2kQhy","react/jsx-dev-runtime":"iTorj","./../../scss/react.scss":"aLSRg","./../../Event":"cqvk6"}],"40376":[function(require,module,exports) {
 /**
  * @mui/material v5.16.1
  *
@@ -33506,7 +33241,7 @@ var _generateUtilityClassesDefault = parcelHelpers.interopDefault(_generateUtili
 var _unstableTrapFocus = require("./Unstable_TrapFocus");
 var _unstableTrapFocusDefault = parcelHelpers.interopDefault(_unstableTrapFocus);
 
-},{"./colors":false,"./styles":false,"./utils":false,"./Accordion":false,"./AccordionActions":false,"./AccordionDetails":false,"./AccordionSummary":false,"./Alert":false,"./AlertTitle":false,"./AppBar":false,"./Autocomplete":false,"./Avatar":false,"./AvatarGroup":false,"./Backdrop":false,"./Badge":false,"./BottomNavigation":false,"./BottomNavigationAction":false,"./Box":"eQD0H","./Breadcrumbs":false,"./Button":false,"./ButtonBase":false,"./ButtonGroup":false,"./Card":"hWYZ3","./CardActionArea":false,"./CardActions":false,"./CardContent":"lVecn","./CardHeader":false,"./CardMedia":"kaOTJ","./Checkbox":false,"./Chip":false,"./CircularProgress":false,"./ClickAwayListener":false,"./Collapse":false,"./Container":false,"./CssBaseline":false,"./darkScrollbar":false,"./Dialog":false,"./DialogActions":false,"./DialogContent":false,"./DialogContentText":false,"./DialogTitle":false,"./Divider":false,"./Drawer":false,"./Fab":false,"./Fade":false,"./FilledInput":false,"./FormControl":false,"./FormControlLabel":false,"./FormGroup":false,"./FormHelperText":false,"./FormLabel":false,"./Grid":false,"./Unstable_Grid2":false,"./Grow":false,"./Hidden":false,"./Icon":false,"./IconButton":"38BrD","./ImageList":false,"./ImageListItem":false,"./ImageListItemBar":false,"./Input":false,"./InputAdornment":false,"./InputBase":false,"./InputLabel":false,"./LinearProgress":false,"./Link":false,"./List":false,"./ListItem":false,"./ListItemAvatar":false,"./ListItemButton":false,"./ListItemIcon":false,"./ListItemSecondaryAction":false,"./ListItemText":false,"./ListSubheader":false,"./Menu":false,"./MenuItem":false,"./MenuList":false,"./MobileStepper":false,"./Modal":false,"./NativeSelect":false,"./NoSsr":false,"./OutlinedInput":false,"./Pagination":false,"./PaginationItem":false,"./Paper":false,"./Popover":false,"./Popper":false,"./Portal":false,"./Radio":false,"./RadioGroup":false,"./Rating":false,"./ScopedCssBaseline":false,"./Select":false,"./Skeleton":false,"./Slide":false,"./Slider":false,"./Snackbar":false,"./SnackbarContent":false,"./SpeedDial":false,"./SpeedDialAction":false,"./SpeedDialIcon":false,"./Stack":false,"./Step":false,"./StepButton":false,"./StepConnector":false,"./StepContent":false,"./StepIcon":false,"./StepLabel":false,"./Stepper":false,"./SvgIcon":false,"./SwipeableDrawer":false,"./Switch":false,"./Tab":false,"./Table":false,"./TableBody":false,"./TableCell":false,"./TableContainer":false,"./TableFooter":false,"./TableHead":false,"./TablePagination":false,"./TableRow":false,"./TableSortLabel":false,"./Tabs":false,"./TabScrollButton":false,"./TextField":false,"./TextareaAutosize":false,"./ToggleButton":false,"./ToggleButtonGroup":false,"./Toolbar":false,"./Tooltip":false,"./Typography":"faxSz","./useMediaQuery":false,"./usePagination":false,"./useScrollTrigger":false,"./Zoom":false,"./useAutocomplete":false,"./GlobalStyles":false,"@mui/base/composeClasses":false,"./generateUtilityClass":false,"./generateUtilityClasses":false,"./Unstable_TrapFocus":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1lzai":[function(require,module,exports) {
+},{"./colors":false,"./styles":false,"./utils":false,"./Accordion":false,"./AccordionActions":false,"./AccordionDetails":false,"./AccordionSummary":false,"./Alert":false,"./AlertTitle":false,"./AppBar":false,"./Autocomplete":false,"./Avatar":false,"./AvatarGroup":false,"./Backdrop":false,"./Badge":"fdxar","./BottomNavigation":false,"./BottomNavigationAction":false,"./Box":"eQD0H","./Breadcrumbs":false,"./Button":false,"./ButtonBase":false,"./ButtonGroup":false,"./Card":"hWYZ3","./CardActionArea":false,"./CardActions":false,"./CardContent":"lVecn","./CardHeader":"hRKul","./CardMedia":"kaOTJ","./Checkbox":false,"./Chip":false,"./CircularProgress":false,"./ClickAwayListener":false,"./Collapse":false,"./Container":false,"./CssBaseline":false,"./darkScrollbar":false,"./Dialog":false,"./DialogActions":false,"./DialogContent":false,"./DialogContentText":false,"./DialogTitle":false,"./Divider":false,"./Drawer":false,"./Fab":false,"./Fade":false,"./FilledInput":false,"./FormControl":false,"./FormControlLabel":false,"./FormGroup":false,"./FormHelperText":false,"./FormLabel":false,"./Grid":false,"./Unstable_Grid2":false,"./Grow":false,"./Hidden":false,"./Icon":false,"./IconButton":"38BrD","./ImageList":false,"./ImageListItem":false,"./ImageListItemBar":false,"./Input":false,"./InputAdornment":false,"./InputBase":false,"./InputLabel":false,"./LinearProgress":false,"./Link":false,"./List":false,"./ListItem":false,"./ListItemAvatar":false,"./ListItemButton":false,"./ListItemIcon":false,"./ListItemSecondaryAction":false,"./ListItemText":false,"./ListSubheader":false,"./Menu":false,"./MenuItem":false,"./MenuList":false,"./MobileStepper":false,"./Modal":false,"./NativeSelect":false,"./NoSsr":false,"./OutlinedInput":false,"./Pagination":false,"./PaginationItem":false,"./Paper":false,"./Popover":false,"./Popper":false,"./Portal":false,"./Radio":false,"./RadioGroup":false,"./Rating":false,"./ScopedCssBaseline":false,"./Select":false,"./Skeleton":false,"./Slide":false,"./Slider":false,"./Snackbar":false,"./SnackbarContent":false,"./SpeedDial":false,"./SpeedDialAction":false,"./SpeedDialIcon":false,"./Stack":false,"./Step":false,"./StepButton":false,"./StepConnector":false,"./StepContent":false,"./StepIcon":false,"./StepLabel":false,"./Stepper":false,"./SvgIcon":false,"./SwipeableDrawer":false,"./Switch":false,"./Tab":false,"./Table":false,"./TableBody":false,"./TableCell":false,"./TableContainer":false,"./TableFooter":false,"./TableHead":false,"./TablePagination":false,"./TableRow":false,"./TableSortLabel":false,"./Tabs":false,"./TabScrollButton":false,"./TextField":false,"./TextareaAutosize":false,"./ToggleButton":false,"./ToggleButtonGroup":false,"./Toolbar":false,"./Tooltip":false,"./Typography":"faxSz","./useMediaQuery":false,"./usePagination":false,"./useScrollTrigger":false,"./Zoom":false,"./useAutocomplete":false,"./GlobalStyles":false,"@mui/base/composeClasses":false,"./generateUtilityClass":false,"./generateUtilityClasses":false,"./Unstable_TrapFocus":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1lzai":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "THEME_ID", ()=>(0, _identifierDefault.default));
@@ -39893,7 +39628,86 @@ function useTheme(defaultTheme = null) {
 }
 exports.default = useTheme;
 
-},{"react":"21dqq","@mui/styled-engine":"eTow5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8OdgZ":[function(require,module,exports) {
+},{"react":"21dqq","@mui/styled-engine":"eTow5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eZlKz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>(0, _useThemePropsDefault.default));
+parcelHelpers.export(exports, "getThemeProps", ()=>(0, _getThemePropsDefault.default));
+var _useThemeProps = require("./useThemeProps");
+var _useThemePropsDefault = parcelHelpers.interopDefault(_useThemeProps);
+var _getThemeProps = require("./getThemeProps");
+var _getThemePropsDefault = parcelHelpers.interopDefault(_getThemeProps);
+"use client";
+
+},{"./useThemeProps":"kDJYN","./getThemeProps":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kDJYN":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>useThemeProps);
+var _getThemeProps = require("./getThemeProps");
+var _getThemePropsDefault = parcelHelpers.interopDefault(_getThemeProps);
+var _useTheme = require("../useTheme");
+var _useThemeDefault = parcelHelpers.interopDefault(_useTheme);
+"use client";
+function useThemeProps({ props, name, defaultTheme, themeId }) {
+    let theme = (0, _useThemeDefault.default)(defaultTheme);
+    if (themeId) theme = theme[themeId] || theme;
+    const mergedProps = (0, _getThemePropsDefault.default)({
+        theme,
+        name,
+        props
+    });
+    return mergedProps;
+}
+
+},{"./getThemeProps":"4T4Gi","../useTheme":"h9QTR","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4T4Gi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>getThemeProps);
+var _resolveProps = require("@mui/utils/resolveProps");
+var _resolvePropsDefault = parcelHelpers.interopDefault(_resolveProps);
+function getThemeProps(params) {
+    const { theme, name, props } = params;
+    if (!theme || !theme.components || !theme.components[name] || !theme.components[name].defaultProps) return props;
+    return (0, _resolvePropsDefault.default)(theme.components[name].defaultProps, props);
+}
+
+},{"@mui/utils/resolveProps":"lUOhv","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lUOhv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>(0, _resolvePropsDefault.default));
+var _resolveProps = require("./resolveProps");
+var _resolvePropsDefault = parcelHelpers.interopDefault(_resolveProps);
+
+},{"./resolveProps":"igTYj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"igTYj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>resolveProps);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+function resolveProps(defaultProps, props) {
+    const output = (0, _extendsDefault.default)({}, props);
+    Object.keys(defaultProps).forEach((propName)=>{
+        if (propName.toString().match(/^(components|slots)$/)) output[propName] = (0, _extendsDefault.default)({}, defaultProps[propName], output[propName]);
+        else if (propName.toString().match(/^(componentsProps|slotProps)$/)) {
+            const defaultSlotProps = defaultProps[propName] || {};
+            const slotProps = props[propName];
+            output[propName] = {};
+            if (!slotProps || !Object.keys(slotProps)) // Reduce the iteration if the slot props is empty
+            output[propName] = defaultSlotProps;
+            else if (!defaultSlotProps || !Object.keys(defaultSlotProps)) // Reduce the iteration if the default slot props is empty
+            output[propName] = slotProps;
+            else {
+                output[propName] = (0, _extendsDefault.default)({}, slotProps);
+                Object.keys(defaultSlotProps).forEach((slotPropName)=>{
+                    output[propName][slotPropName] = resolveProps(defaultSlotProps[slotPropName], slotProps[slotPropName]);
+                });
+            }
+        } else if (output[propName] === undefined) output[propName] = defaultProps[propName];
+    });
+    return output;
+}
+
+},{"@babel/runtime/helpers/esm/extends":"fTBFS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8OdgZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "createMuiTheme", ()=>createMuiTheme);
@@ -41132,7 +40946,27 @@ var _createThemeDefault = parcelHelpers.interopDefault(_createTheme);
 const defaultTheme = (0, _createThemeDefault.default)();
 exports.default = defaultTheme;
 
-},{"./createTheme":"8OdgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"32xTg":[function(require,module,exports) {
+},{"./createTheme":"8OdgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dewuS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>useThemeProps);
+var _useThemeProps = require("@mui/system/useThemeProps");
+var _useThemePropsDefault = parcelHelpers.interopDefault(_useThemeProps);
+var _defaultTheme = require("./defaultTheme");
+var _defaultThemeDefault = parcelHelpers.interopDefault(_defaultTheme);
+var _identifier = require("./identifier");
+var _identifierDefault = parcelHelpers.interopDefault(_identifier);
+"use client";
+function useThemeProps({ props, name }) {
+    return (0, _useThemePropsDefault.default)({
+        props,
+        name,
+        defaultTheme: (0, _defaultThemeDefault.default),
+        themeId: (0, _identifierDefault.default)
+    });
+}
+
+},{"@mui/system/useThemeProps":"eZlKz","./defaultTheme":"goiH2","./identifier":"7r4RQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"32xTg":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "slotShouldForwardProp", ()=>(0, _slotShouldForwardPropDefault.default));
@@ -41646,50 +41480,457 @@ const getOverlayAlpha = (elevation)=>{
 };
 exports.default = getOverlayAlpha;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eQD0H":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fdxar":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>(0, _boxDefault.default));
-parcelHelpers.export(exports, "boxClasses", ()=>(0, _boxClassesDefault.default));
-var _box = require("./Box");
-var _boxDefault = parcelHelpers.interopDefault(_box);
-var _boxClasses = require("./boxClasses");
-var _boxClassesDefault = parcelHelpers.interopDefault(_boxClasses);
-parcelHelpers.exportAll(_boxClasses, exports);
+parcelHelpers.export(exports, "default", ()=>(0, _badgeDefault.default));
+parcelHelpers.export(exports, "badgeClasses", ()=>(0, _badgeClassesDefault.default));
+var _badge = require("./Badge");
+var _badgeDefault = parcelHelpers.interopDefault(_badge);
+var _badgeClasses = require("./badgeClasses");
+var _badgeClassesDefault = parcelHelpers.interopDefault(_badgeClasses);
+parcelHelpers.exportAll(_badgeClasses, exports);
 "use client";
 
-},{"./Box":"hk5c0","./boxClasses":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hk5c0":[function(require,module,exports) {
+},{"./Badge":"ePAuo","./badgeClasses":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ePAuo":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _system = require("@mui/system");
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
+var _react = require("react");
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _className = require("../className");
-var _styles = require("../styles");
-var _identifier = require("../styles/identifier");
-var _identifierDefault = parcelHelpers.interopDefault(_identifier);
-var _boxClasses = require("./boxClasses");
-var _boxClassesDefault = parcelHelpers.interopDefault(_boxClasses);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _usePreviousProps = require("@mui/utils/usePreviousProps");
+var _usePreviousPropsDefault = parcelHelpers.interopDefault(_usePreviousProps);
+var _composeClasses = require("@mui/utils/composeClasses");
+var _composeClassesDefault = parcelHelpers.interopDefault(_composeClasses);
+var _useBadge = require("@mui/base/useBadge");
+var _utils = require("@mui/base/utils");
+var _zeroStyled = require("../zero-styled");
+var _defaultPropsProvider = require("../DefaultPropsProvider");
+var _capitalize = require("../utils/capitalize");
+var _capitalizeDefault = parcelHelpers.interopDefault(_capitalize);
+var _badgeClasses = require("./badgeClasses");
+var _badgeClassesDefault = parcelHelpers.interopDefault(_badgeClasses);
+var _jsxRuntime = require("react/jsx-runtime");
 "use client";
-const defaultTheme = (0, _styles.createTheme)();
-const Box = (0, _system.createBox)({
-    themeId: (0, _identifierDefault.default),
-    defaultTheme,
-    defaultClassName: (0, _boxClassesDefault.default).root,
-    generateClassName: (0, _className.unstable_ClassNameGenerator).generate
+const _excluded = [
+    "anchorOrigin",
+    "className",
+    "classes",
+    "component",
+    "components",
+    "componentsProps",
+    "children",
+    "overlap",
+    "color",
+    "invisible",
+    "max",
+    "badgeContent",
+    "slots",
+    "slotProps",
+    "showZero",
+    "variant"
+];
+const RADIUS_STANDARD = 10;
+const RADIUS_DOT = 4;
+const useUtilityClasses = (ownerState)=>{
+    const { color, anchorOrigin, invisible, overlap, variant, classes = {} } = ownerState;
+    const slots = {
+        root: [
+            "root"
+        ],
+        badge: [
+            "badge",
+            variant,
+            invisible && "invisible",
+            `anchorOrigin${(0, _capitalizeDefault.default)(anchorOrigin.vertical)}${(0, _capitalizeDefault.default)(anchorOrigin.horizontal)}`,
+            `anchorOrigin${(0, _capitalizeDefault.default)(anchorOrigin.vertical)}${(0, _capitalizeDefault.default)(anchorOrigin.horizontal)}${(0, _capitalizeDefault.default)(overlap)}`,
+            `overlap${(0, _capitalizeDefault.default)(overlap)}`,
+            color !== "default" && `color${(0, _capitalizeDefault.default)(color)}`
+        ]
+    };
+    return (0, _composeClassesDefault.default)(slots, (0, _badgeClasses.getBadgeUtilityClass), classes);
+};
+const BadgeRoot = (0, _zeroStyled.styled)("span", {
+    name: "MuiBadge",
+    slot: "Root",
+    overridesResolver: (props, styles)=>styles.root
+})({
+    position: "relative",
+    display: "inline-flex",
+    // For correct alignment with the text.
+    verticalAlign: "middle",
+    flexShrink: 0
 });
-Box.propTypes /* remove-proptypes */  = {
+const BadgeBadge = (0, _zeroStyled.styled)("span", {
+    name: "MuiBadge",
+    slot: "Badge",
+    overridesResolver: (props, styles)=>{
+        const { ownerState } = props;
+        return [
+            styles.badge,
+            styles[ownerState.variant],
+            styles[`anchorOrigin${(0, _capitalizeDefault.default)(ownerState.anchorOrigin.vertical)}${(0, _capitalizeDefault.default)(ownerState.anchorOrigin.horizontal)}${(0, _capitalizeDefault.default)(ownerState.overlap)}`],
+            ownerState.color !== "default" && styles[`color${(0, _capitalizeDefault.default)(ownerState.color)}`],
+            ownerState.invisible && styles.invisible
+        ];
+    }
+})(({ theme })=>{
+    var _theme$vars;
+    return {
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        alignContent: "center",
+        alignItems: "center",
+        position: "absolute",
+        boxSizing: "border-box",
+        fontFamily: theme.typography.fontFamily,
+        fontWeight: theme.typography.fontWeightMedium,
+        fontSize: theme.typography.pxToRem(12),
+        minWidth: RADIUS_STANDARD * 2,
+        lineHeight: 1,
+        padding: "0 6px",
+        height: RADIUS_STANDARD * 2,
+        borderRadius: RADIUS_STANDARD,
+        zIndex: 1,
+        // Render the badge on top of potential ripples.
+        transition: theme.transitions.create("transform", {
+            easing: theme.transitions.easing.easeInOut,
+            duration: theme.transitions.duration.enteringScreen
+        }),
+        variants: [
+            ...Object.keys(((_theme$vars = theme.vars) != null ? _theme$vars : theme).palette).filter((key)=>{
+                var _theme$vars2, _theme$vars3;
+                return ((_theme$vars2 = theme.vars) != null ? _theme$vars2 : theme).palette[key].main && ((_theme$vars3 = theme.vars) != null ? _theme$vars3 : theme).palette[key].contrastText;
+            }).map((color)=>({
+                    props: {
+                        color
+                    },
+                    style: {
+                        backgroundColor: (theme.vars || theme).palette[color].main,
+                        color: (theme.vars || theme).palette[color].contrastText
+                    }
+                })),
+            {
+                props: {
+                    variant: "dot"
+                },
+                style: {
+                    borderRadius: RADIUS_DOT,
+                    height: RADIUS_DOT * 2,
+                    minWidth: RADIUS_DOT * 2,
+                    padding: 0
+                }
+            },
+            {
+                props: ({ ownerState })=>ownerState.anchorOrigin.vertical === "top" && ownerState.anchorOrigin.horizontal === "right" && ownerState.overlap === "rectangular",
+                style: {
+                    top: 0,
+                    right: 0,
+                    transform: "scale(1) translate(50%, -50%)",
+                    transformOrigin: "100% 0%",
+                    [`&.${(0, _badgeClassesDefault.default).invisible}`]: {
+                        transform: "scale(0) translate(50%, -50%)"
+                    }
+                }
+            },
+            {
+                props: ({ ownerState })=>ownerState.anchorOrigin.vertical === "bottom" && ownerState.anchorOrigin.horizontal === "right" && ownerState.overlap === "rectangular",
+                style: {
+                    bottom: 0,
+                    right: 0,
+                    transform: "scale(1) translate(50%, 50%)",
+                    transformOrigin: "100% 100%",
+                    [`&.${(0, _badgeClassesDefault.default).invisible}`]: {
+                        transform: "scale(0) translate(50%, 50%)"
+                    }
+                }
+            },
+            {
+                props: ({ ownerState })=>ownerState.anchorOrigin.vertical === "top" && ownerState.anchorOrigin.horizontal === "left" && ownerState.overlap === "rectangular",
+                style: {
+                    top: 0,
+                    left: 0,
+                    transform: "scale(1) translate(-50%, -50%)",
+                    transformOrigin: "0% 0%",
+                    [`&.${(0, _badgeClassesDefault.default).invisible}`]: {
+                        transform: "scale(0) translate(-50%, -50%)"
+                    }
+                }
+            },
+            {
+                props: ({ ownerState })=>ownerState.anchorOrigin.vertical === "bottom" && ownerState.anchorOrigin.horizontal === "left" && ownerState.overlap === "rectangular",
+                style: {
+                    bottom: 0,
+                    left: 0,
+                    transform: "scale(1) translate(-50%, 50%)",
+                    transformOrigin: "0% 100%",
+                    [`&.${(0, _badgeClassesDefault.default).invisible}`]: {
+                        transform: "scale(0) translate(-50%, 50%)"
+                    }
+                }
+            },
+            {
+                props: ({ ownerState })=>ownerState.anchorOrigin.vertical === "top" && ownerState.anchorOrigin.horizontal === "right" && ownerState.overlap === "circular",
+                style: {
+                    top: "14%",
+                    right: "14%",
+                    transform: "scale(1) translate(50%, -50%)",
+                    transformOrigin: "100% 0%",
+                    [`&.${(0, _badgeClassesDefault.default).invisible}`]: {
+                        transform: "scale(0) translate(50%, -50%)"
+                    }
+                }
+            },
+            {
+                props: ({ ownerState })=>ownerState.anchorOrigin.vertical === "bottom" && ownerState.anchorOrigin.horizontal === "right" && ownerState.overlap === "circular",
+                style: {
+                    bottom: "14%",
+                    right: "14%",
+                    transform: "scale(1) translate(50%, 50%)",
+                    transformOrigin: "100% 100%",
+                    [`&.${(0, _badgeClassesDefault.default).invisible}`]: {
+                        transform: "scale(0) translate(50%, 50%)"
+                    }
+                }
+            },
+            {
+                props: ({ ownerState })=>ownerState.anchorOrigin.vertical === "top" && ownerState.anchorOrigin.horizontal === "left" && ownerState.overlap === "circular",
+                style: {
+                    top: "14%",
+                    left: "14%",
+                    transform: "scale(1) translate(-50%, -50%)",
+                    transformOrigin: "0% 0%",
+                    [`&.${(0, _badgeClassesDefault.default).invisible}`]: {
+                        transform: "scale(0) translate(-50%, -50%)"
+                    }
+                }
+            },
+            {
+                props: ({ ownerState })=>ownerState.anchorOrigin.vertical === "bottom" && ownerState.anchorOrigin.horizontal === "left" && ownerState.overlap === "circular",
+                style: {
+                    bottom: "14%",
+                    left: "14%",
+                    transform: "scale(1) translate(-50%, 50%)",
+                    transformOrigin: "0% 100%",
+                    [`&.${(0, _badgeClassesDefault.default).invisible}`]: {
+                        transform: "scale(0) translate(-50%, 50%)"
+                    }
+                }
+            },
+            {
+                props: {
+                    invisible: true
+                },
+                style: {
+                    transition: theme.transitions.create("transform", {
+                        easing: theme.transitions.easing.easeInOut,
+                        duration: theme.transitions.duration.leavingScreen
+                    })
+                }
+            }
+        ]
+    };
+});
+const Badge = /*#__PURE__*/ _react.forwardRef(function Badge(inProps, ref) {
+    var _ref, _slots$root, _ref2, _slots$badge, _slotProps$root, _slotProps$badge;
+    const props = (0, _defaultPropsProvider.useDefaultProps)({
+        props: inProps,
+        name: "MuiBadge"
+    });
+    const { anchorOrigin: anchorOriginProp = {
+        vertical: "top",
+        horizontal: "right"
+    }, className, component, components = {}, componentsProps = {}, children, overlap: overlapProp = "rectangular", color: colorProp = "default", invisible: invisibleProp = false, max: maxProp = 99, badgeContent: badgeContentProp, slots, slotProps, showZero = false, variant: variantProp = "standard" } = props, other = (0, _objectWithoutPropertiesLooseDefault.default)(props, _excluded);
+    const { badgeContent, invisible: invisibleFromHook, max, displayValue: displayValueFromHook } = (0, _useBadge.useBadge)({
+        max: maxProp,
+        invisible: invisibleProp,
+        badgeContent: badgeContentProp,
+        showZero
+    });
+    const prevProps = (0, _usePreviousPropsDefault.default)({
+        anchorOrigin: anchorOriginProp,
+        color: colorProp,
+        overlap: overlapProp,
+        variant: variantProp,
+        badgeContent: badgeContentProp
+    });
+    const invisible = invisibleFromHook || badgeContent == null && variantProp !== "dot";
+    const { color = colorProp, overlap = overlapProp, anchorOrigin = anchorOriginProp, variant = variantProp } = invisible ? prevProps : props;
+    const displayValue = variant !== "dot" ? displayValueFromHook : undefined;
+    const ownerState = (0, _extendsDefault.default)({}, props, {
+        badgeContent,
+        invisible,
+        max,
+        displayValue,
+        showZero,
+        anchorOrigin,
+        color,
+        overlap,
+        variant
+    });
+    const classes = useUtilityClasses(ownerState);
+    // support both `slots` and `components` for backward compatibility
+    const RootSlot = (_ref = (_slots$root = slots == null ? void 0 : slots.root) != null ? _slots$root : components.Root) != null ? _ref : BadgeRoot;
+    const BadgeSlot = (_ref2 = (_slots$badge = slots == null ? void 0 : slots.badge) != null ? _slots$badge : components.Badge) != null ? _ref2 : BadgeBadge;
+    const rootSlotProps = (_slotProps$root = slotProps == null ? void 0 : slotProps.root) != null ? _slotProps$root : componentsProps.root;
+    const badgeSlotProps = (_slotProps$badge = slotProps == null ? void 0 : slotProps.badge) != null ? _slotProps$badge : componentsProps.badge;
+    const rootProps = (0, _utils.useSlotProps)({
+        elementType: RootSlot,
+        externalSlotProps: rootSlotProps,
+        externalForwardedProps: other,
+        additionalProps: {
+            ref,
+            as: component
+        },
+        ownerState,
+        className: (0, _clsxDefault.default)(rootSlotProps == null ? void 0 : rootSlotProps.className, classes.root, className)
+    });
+    const badgeProps = (0, _utils.useSlotProps)({
+        elementType: BadgeSlot,
+        externalSlotProps: badgeSlotProps,
+        ownerState,
+        className: (0, _clsxDefault.default)(classes.badge, badgeSlotProps == null ? void 0 : badgeSlotProps.className)
+    });
+    return /*#__PURE__*/ (0, _jsxRuntime.jsxs)(RootSlot, (0, _extendsDefault.default)({}, rootProps, {
+        children: [
+            children,
+            /*#__PURE__*/ (0, _jsxRuntime.jsx)(BadgeSlot, (0, _extendsDefault.default)({}, badgeProps, {
+                children: displayValue
+            }))
+        ]
+    }));
+});
+Badge.propTypes /* remove-proptypes */  = {
     // ┌────────────────────────────── Warning ──────────────────────────────┐
     // │ These PropTypes are generated from the TypeScript type definitions. │
     // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
     // └─────────────────────────────────────────────────────────────────────┘
     /**
-   * @ignore
+   * The anchor of the badge.
+   * @default {
+   *   vertical: 'top',
+   *   horizontal: 'right',
+   * }
+   */ anchorOrigin: (0, _propTypesDefault.default).shape({
+        horizontal: (0, _propTypesDefault.default).oneOf([
+            "left",
+            "right"
+        ]).isRequired,
+        vertical: (0, _propTypesDefault.default).oneOf([
+            "bottom",
+            "top"
+        ]).isRequired
+    }),
+    /**
+   * The content rendered within the badge.
+   */ badgeContent: (0, _propTypesDefault.default).node,
+    /**
+   * The badge will be added relative to this node.
    */ children: (0, _propTypesDefault.default).node,
+    /**
+   * Override or extend the styles applied to the component.
+   */ classes: (0, _propTypesDefault.default).object,
+    /**
+   * @ignore
+   */ className: (0, _propTypesDefault.default).string,
+    /**
+   * The color of the component.
+   * It supports both default and custom theme colors, which can be added as shown in the
+   * [palette customization guide](https://mui.com/material-ui/customization/palette/#custom-colors).
+   * @default 'default'
+   */ color: (0, _propTypesDefault.default /* @typescript-to-proptypes-ignore */ ).oneOfType([
+        (0, _propTypesDefault.default).oneOf([
+            "default",
+            "primary",
+            "secondary",
+            "error",
+            "info",
+            "success",
+            "warning"
+        ]),
+        (0, _propTypesDefault.default).string
+    ]),
     /**
    * The component used for the root node.
    * Either a string to use a HTML element or a component.
    */ component: (0, _propTypesDefault.default).elementType,
+    /**
+   * The components used for each slot inside.
+   *
+   * This prop is an alias for the `slots` prop.
+   * It's recommended to use the `slots` prop instead.
+   *
+   * @default {}
+   */ components: (0, _propTypesDefault.default).shape({
+        Badge: (0, _propTypesDefault.default).elementType,
+        Root: (0, _propTypesDefault.default).elementType
+    }),
+    /**
+   * The extra props for the slot components.
+   * You can override the existing props or add new ones.
+   *
+   * This prop is an alias for the `slotProps` prop.
+   * It's recommended to use the `slotProps` prop instead, as `componentsProps` will be deprecated in the future.
+   *
+   * @default {}
+   */ componentsProps: (0, _propTypesDefault.default).shape({
+        badge: (0, _propTypesDefault.default).oneOfType([
+            (0, _propTypesDefault.default).func,
+            (0, _propTypesDefault.default).object
+        ]),
+        root: (0, _propTypesDefault.default).oneOfType([
+            (0, _propTypesDefault.default).func,
+            (0, _propTypesDefault.default).object
+        ])
+    }),
+    /**
+   * If `true`, the badge is invisible.
+   * @default false
+   */ invisible: (0, _propTypesDefault.default).bool,
+    /**
+   * Max count to show.
+   * @default 99
+   */ max: (0, _propTypesDefault.default).number,
+    /**
+   * Wrapped shape the badge should overlap.
+   * @default 'rectangular'
+   */ overlap: (0, _propTypesDefault.default).oneOf([
+        "circular",
+        "rectangular"
+    ]),
+    /**
+   * Controls whether the badge is hidden when `badgeContent` is zero.
+   * @default false
+   */ showZero: (0, _propTypesDefault.default).bool,
+    /**
+   * The props used for each slot inside the Badge.
+   * @default {}
+   */ slotProps: (0, _propTypesDefault.default).shape({
+        badge: (0, _propTypesDefault.default).oneOfType([
+            (0, _propTypesDefault.default).func,
+            (0, _propTypesDefault.default).object
+        ]),
+        root: (0, _propTypesDefault.default).oneOfType([
+            (0, _propTypesDefault.default).func,
+            (0, _propTypesDefault.default).object
+        ])
+    }),
+    /**
+   * The components used for each slot inside the Badge.
+   * Either a string to use a HTML element or a component.
+   * @default {}
+   */ slots: (0, _propTypesDefault.default).shape({
+        badge: (0, _propTypesDefault.default).elementType,
+        root: (0, _propTypesDefault.default).elementType
+    }),
     /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */ sx: (0, _propTypesDefault.default).oneOfType([
@@ -41700,16 +41941,110 @@ Box.propTypes /* remove-proptypes */  = {
         ])),
         (0, _propTypesDefault.default).func,
         (0, _propTypesDefault.default).object
+    ]),
+    /**
+   * The variant to use.
+   * @default 'standard'
+   */ variant: (0, _propTypesDefault.default /* @typescript-to-proptypes-ignore */ ).oneOfType([
+        (0, _propTypesDefault.default).oneOf([
+            "dot",
+            "standard"
+        ]),
+        (0, _propTypesDefault.default).string
     ])
 };
-exports.default = Box;
+exports.default = Badge;
 
-},{"@mui/system":"Q0Zql","prop-types":"7wKI2","../className":"3zmn3","../styles":"1lzai","../styles/identifier":"7r4RQ","./boxClasses":"hyi6W","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3zmn3":[function(require,module,exports) {
-// eslint-disable-next-line import/prefer-default-export
+},{"@babel/runtime/helpers/esm/extends":"fTBFS","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","react":"21dqq","prop-types":"7wKI2","clsx":"gocd3","@mui/utils/usePreviousProps":"3i9I3","@mui/utils/composeClasses":"4kKno","@mui/base/useBadge":"a1ezr","@mui/base/utils":"cgIce","../zero-styled":"e4lsd","../DefaultPropsProvider":"gbkfk","../utils/capitalize":"lwNtZ","./badgeClasses":"24FJc","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3i9I3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "unstable_ClassNameGenerator", ()=>(0, _utils.unstable_ClassNameGenerator));
+parcelHelpers.export(exports, "default", ()=>(0, _usePreviousPropsDefault.default));
+var _usePreviousProps = require("./usePreviousProps");
+var _usePreviousPropsDefault = parcelHelpers.interopDefault(_usePreviousProps);
+
+},{"./usePreviousProps":"g2Ras","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"g2Ras":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+"use client";
+const usePreviousProps = (value)=>{
+    const ref = _react.useRef({});
+    _react.useEffect(()=>{
+        ref.current = value;
+    });
+    return ref.current;
+};
+exports.default = usePreviousProps;
+
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4kKno":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>(0, _composeClassesDefault.default));
+var _composeClasses = require("./composeClasses");
+var _composeClassesDefault = parcelHelpers.interopDefault(_composeClasses);
+
+},{"./composeClasses":"hOLJt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hOLJt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>composeClasses);
+function composeClasses(slots, getUtilityClass, classes) {
+    const output = {};
+    Object.keys(slots).forEach(// `Object.keys(slots)` can't be wider than `T` because we infer `T` from `slots`.
+    // @ts-expect-error https://github.com/microsoft/TypeScript/pull/12253#issuecomment-263132208
+    (slot)=>{
+        output[slot] = slots[slot].reduce((acc, key)=>{
+            if (key) {
+                const utilityClass = getUtilityClass(key);
+                if (utilityClass !== "") acc.push(utilityClass);
+                if (classes && classes[key]) acc.push(classes[key]);
+            }
+            return acc;
+        }, []).join(" ");
+    });
+    return output;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"a1ezr":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "useBadge", ()=>(0, _useBadge.useBadge));
+var _useBadge = require("./useBadge");
+var _useBadgeTypes = require("./useBadge.types");
+parcelHelpers.exportAll(_useBadgeTypes, exports);
+"use client";
+
+},{"./useBadge":"adCqW","./useBadge.types":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"adCqW":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ *
+ * Demos:
+ *
+ * - [Badge](https://mui.com/base-ui/react-badge/#hook)
+ *
+ * API:
+ *
+ * - [useBadge API](https://mui.com/base-ui/react-badge/hooks-api/#use-badge)
+ */ parcelHelpers.export(exports, "useBadge", ()=>useBadge);
 var _utils = require("@mui/utils");
+"use client";
+function useBadge(parameters) {
+    const { badgeContent: badgeContentProp, invisible: invisibleProp = false, max: maxProp = 99, showZero = false } = parameters;
+    const prevProps = (0, _utils.usePreviousProps)({
+        badgeContent: badgeContentProp,
+        max: maxProp
+    });
+    let invisible = invisibleProp;
+    if (invisibleProp === false && badgeContentProp === 0 && !showZero) invisible = true;
+    const { badgeContent, max = maxProp } = invisible ? prevProps : parameters;
+    const displayValue = badgeContent && Number(badgeContent) > max ? `${max}+` : badgeContent;
+    return {
+        badgeContent,
+        invisible,
+        max,
+        displayValue
+    };
+}
 
 },{"@mui/utils":"iivny","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iivny":[function(require,module,exports) {
 /**
@@ -41848,7 +42183,7 @@ var _classNameGeneratorDefault = parcelHelpers.interopDefault(_classNameGenerato
 var _clamp = require("./clamp");
 var _clampDefault = parcelHelpers.interopDefault(_clamp);
 
-},{"./chainPropTypes":false,"./deepmerge":false,"./elementAcceptingRef":false,"./elementTypeAcceptingRef":false,"./exactProp":false,"./formatMuiErrorMessage":false,"./getDisplayName":false,"./HTMLElementType":false,"./ponyfillGlobal":false,"./refType":false,"./capitalize":false,"./createChainedFunction":false,"./debounce":false,"./deprecatedPropType":false,"./isMuiElement":false,"./ownerDocument":false,"./ownerWindow":false,"./requirePropFactory":false,"./setRef":false,"./useEnhancedEffect":false,"./useId":false,"./unsupportedProp":false,"./useControlled":false,"./useEventCallback":false,"./useForkRef":false,"./useLazyRef":false,"./useTimeout":false,"./useOnMount":false,"./useIsFocusVisible":false,"./getScrollbarSize":false,"./scrollLeft":false,"./usePreviousProps":false,"./getValidReactChildren":false,"./visuallyHidden":false,"./integerPropType":false,"./resolveProps":false,"./composeClasses":false,"./generateUtilityClass":false,"./generateUtilityClasses":false,"./ClassNameGenerator":"jqPAj","./clamp":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"d7DEu":[function(require,module,exports) {
+},{"./chainPropTypes":false,"./deepmerge":false,"./elementAcceptingRef":false,"./elementTypeAcceptingRef":false,"./exactProp":false,"./formatMuiErrorMessage":false,"./getDisplayName":false,"./HTMLElementType":false,"./ponyfillGlobal":false,"./refType":false,"./capitalize":false,"./createChainedFunction":false,"./debounce":false,"./deprecatedPropType":false,"./isMuiElement":false,"./ownerDocument":false,"./ownerWindow":false,"./requirePropFactory":false,"./setRef":false,"./useEnhancedEffect":false,"./useId":false,"./unsupportedProp":false,"./useControlled":false,"./useEventCallback":false,"./useForkRef":"cAy1c","./useLazyRef":false,"./useTimeout":false,"./useOnMount":false,"./useIsFocusVisible":false,"./getScrollbarSize":false,"./scrollLeft":false,"./usePreviousProps":"3i9I3","./getValidReactChildren":false,"./visuallyHidden":false,"./integerPropType":false,"./resolveProps":false,"./composeClasses":false,"./generateUtilityClass":false,"./generateUtilityClasses":false,"./ClassNameGenerator":"jqPAj","./clamp":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"d7DEu":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>(0, _chainPropTypesDefault.default));
@@ -42307,70 +42642,6 @@ validator.isRequired = requiredInteger;
 validatorNoop.isRequired = validatorNoop;
 exports.default = validator;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lUOhv":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>(0, _resolvePropsDefault.default));
-var _resolveProps = require("./resolveProps");
-var _resolvePropsDefault = parcelHelpers.interopDefault(_resolveProps);
-
-},{"./resolveProps":"igTYj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"igTYj":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>resolveProps);
-var _extends = require("@babel/runtime/helpers/esm/extends");
-var _extendsDefault = parcelHelpers.interopDefault(_extends);
-function resolveProps(defaultProps, props) {
-    const output = (0, _extendsDefault.default)({}, props);
-    Object.keys(defaultProps).forEach((propName)=>{
-        if (propName.toString().match(/^(components|slots)$/)) output[propName] = (0, _extendsDefault.default)({}, defaultProps[propName], output[propName]);
-        else if (propName.toString().match(/^(componentsProps|slotProps)$/)) {
-            const defaultSlotProps = defaultProps[propName] || {};
-            const slotProps = props[propName];
-            output[propName] = {};
-            if (!slotProps || !Object.keys(slotProps)) // Reduce the iteration if the slot props is empty
-            output[propName] = defaultSlotProps;
-            else if (!defaultSlotProps || !Object.keys(defaultSlotProps)) // Reduce the iteration if the default slot props is empty
-            output[propName] = slotProps;
-            else {
-                output[propName] = (0, _extendsDefault.default)({}, slotProps);
-                Object.keys(defaultSlotProps).forEach((slotPropName)=>{
-                    output[propName][slotPropName] = resolveProps(defaultSlotProps[slotPropName], slotProps[slotPropName]);
-                });
-            }
-        } else if (output[propName] === undefined) output[propName] = defaultProps[propName];
-    });
-    return output;
-}
-
-},{"@babel/runtime/helpers/esm/extends":"fTBFS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4kKno":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>(0, _composeClassesDefault.default));
-var _composeClasses = require("./composeClasses");
-var _composeClassesDefault = parcelHelpers.interopDefault(_composeClasses);
-
-},{"./composeClasses":"hOLJt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hOLJt":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>composeClasses);
-function composeClasses(slots, getUtilityClass, classes) {
-    const output = {};
-    Object.keys(slots).forEach(// `Object.keys(slots)` can't be wider than `T` because we infer `T` from `slots`.
-    // @ts-expect-error https://github.com/microsoft/TypeScript/pull/12253#issuecomment-263132208
-    (slot)=>{
-        output[slot] = slots[slot].reduce((acc, key)=>{
-            if (key) {
-                const utilityClass = getUtilityClass(key);
-                if (utilityClass !== "") acc.push(utilityClass);
-                if (classes && classes[key]) acc.push(classes[key]);
-            }
-            return acc;
-        }, []).join(" ");
-    });
-    return output;
-}
-
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7eO93":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -42392,7 +42663,446 @@ function generateUtilityClasses(componentName, slots, globalStatePrefix = "Mui")
     return result;
 }
 
-},{"../generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hyi6W":[function(require,module,exports) {
+},{"../generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cgIce":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "appendOwnerState", ()=>(0, _appendOwnerState.appendOwnerState));
+parcelHelpers.export(exports, "areArraysEqual", ()=>(0, _areArraysEqual.areArraysEqual));
+parcelHelpers.export(exports, "ClassNameConfigurator", ()=>(0, _classNameConfigurator.ClassNameConfigurator));
+parcelHelpers.export(exports, "extractEventHandlers", ()=>(0, _extractEventHandlers.extractEventHandlers));
+parcelHelpers.export(exports, "isHostComponent", ()=>(0, _isHostComponent.isHostComponent));
+parcelHelpers.export(exports, "resolveComponentProps", ()=>(0, _resolveComponentProps.resolveComponentProps));
+parcelHelpers.export(exports, "useRootElementName", ()=>(0, _useRootElementName.useRootElementName));
+parcelHelpers.export(exports, "useSlotProps", ()=>(0, _useSlotProps.useSlotProps));
+parcelHelpers.export(exports, "mergeSlotProps", ()=>(0, _mergeSlotProps.mergeSlotProps));
+parcelHelpers.export(exports, "prepareForSlot", ()=>(0, _prepareForSlot.prepareForSlot));
+var _appendOwnerState = require("./appendOwnerState");
+var _areArraysEqual = require("./areArraysEqual");
+var _classNameConfigurator = require("./ClassNameConfigurator");
+var _extractEventHandlers = require("./extractEventHandlers");
+var _isHostComponent = require("./isHostComponent");
+var _resolveComponentProps = require("./resolveComponentProps");
+var _useRootElementName = require("./useRootElementName");
+var _useSlotProps = require("./useSlotProps");
+var _mergeSlotProps = require("./mergeSlotProps");
+var _prepareForSlot = require("./prepareForSlot");
+var _polymorphicComponent = require("./PolymorphicComponent");
+parcelHelpers.exportAll(_polymorphicComponent, exports);
+var _types = require("./types");
+parcelHelpers.exportAll(_types, exports);
+"use client";
+
+},{"./appendOwnerState":false,"./areArraysEqual":false,"./ClassNameConfigurator":false,"./extractEventHandlers":false,"./isHostComponent":false,"./resolveComponentProps":false,"./useRootElementName":false,"./useSlotProps":"5X0R6","./mergeSlotProps":false,"./prepareForSlot":false,"./PolymorphicComponent":false,"./types":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hedlX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * Type of the ownerState based on the type of an element it applies to.
+ * This resolves to the provided OwnerState for React components and `undefined` for host components.
+ * Falls back to `OwnerState | undefined` when the exact type can't be determined in development time.
+ */ /**
+ * Appends the ownerState object to the props, merging with the existing one if necessary.
+ *
+ * @param elementType Type of the element that owns the `existingProps`. If the element is a DOM node or undefined, `ownerState` is not applied.
+ * @param otherProps Props of the element.
+ * @param ownerState
+ */ parcelHelpers.export(exports, "appendOwnerState", ()=>appendOwnerState);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _isHostComponent = require("./isHostComponent");
+function appendOwnerState(elementType, otherProps, ownerState) {
+    if (elementType === undefined || (0, _isHostComponent.isHostComponent)(elementType)) return otherProps;
+    return (0, _extendsDefault.default)({}, otherProps, {
+        ownerState: (0, _extendsDefault.default)({}, otherProps.ownerState, ownerState)
+    });
+}
+
+},{"@babel/runtime/helpers/esm/extends":"fTBFS","./isHostComponent":"b3wck","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b3wck":[function(require,module,exports) {
+/**
+ * Determines if a given element is a DOM element name (i.e. not a React component).
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "isHostComponent", ()=>isHostComponent);
+function isHostComponent(element) {
+    return typeof element === "string";
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iYj1L":[function(require,module,exports) {
+/**
+ * Extracts event handlers from a given object.
+ * A prop is considered an event handler if it is a function and its name starts with `on`.
+ *
+ * @param object An object to extract event handlers from.
+ * @param excludeKeys An array of keys to exclude from the returned object.
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "extractEventHandlers", ()=>extractEventHandlers);
+function extractEventHandlers(object, excludeKeys = []) {
+    if (object === undefined) return {};
+    const result = {};
+    Object.keys(object).filter((prop)=>prop.match(/^on[A-Z]/) && typeof object[prop] === "function" && !excludeKeys.includes(prop)).forEach((prop)=>{
+        result[prop] = object[prop];
+    });
+    return result;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bdeRV":[function(require,module,exports) {
+/**
+ * If `componentProps` is a function, calls it with the provided `ownerState`.
+ * Otherwise, just returns `componentProps`.
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "resolveComponentProps", ()=>resolveComponentProps);
+function resolveComponentProps(componentProps, ownerState, slotState) {
+    if (typeof componentProps === "function") return componentProps(ownerState, slotState);
+    return componentProps;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5X0R6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * @ignore - do not document.
+ * Builds the props to be passed into the slot of an unstyled component.
+ * It merges the internal props of the component with the ones supplied by the user, allowing to customize the behavior.
+ * If the slot component is not a host component, it also merges in the `ownerState`.
+ *
+ * @param parameters.getSlotProps - A function that returns the props to be passed to the slot component.
+ */ parcelHelpers.export(exports, "useSlotProps", ()=>useSlotProps);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
+var _utils = require("@mui/utils");
+var _appendOwnerState = require("./appendOwnerState");
+var _mergeSlotProps = require("./mergeSlotProps");
+var _resolveComponentProps = require("./resolveComponentProps");
+"use client";
+const _excluded = [
+    "elementType",
+    "externalSlotProps",
+    "ownerState",
+    "skipResolvingSlotProps"
+];
+function useSlotProps(parameters) {
+    var _parameters$additiona;
+    const { elementType, externalSlotProps, ownerState, skipResolvingSlotProps = false } = parameters, rest = (0, _objectWithoutPropertiesLooseDefault.default)(parameters, _excluded);
+    const resolvedComponentsProps = skipResolvingSlotProps ? {} : (0, _resolveComponentProps.resolveComponentProps)(externalSlotProps, ownerState);
+    const { props: mergedProps, internalRef } = (0, _mergeSlotProps.mergeSlotProps)((0, _extendsDefault.default)({}, rest, {
+        externalSlotProps: resolvedComponentsProps
+    }));
+    const ref = (0, _utils.unstable_useForkRef)(internalRef, resolvedComponentsProps == null ? void 0 : resolvedComponentsProps.ref, (_parameters$additiona = parameters.additionalProps) == null ? void 0 : _parameters$additiona.ref);
+    const props = (0, _appendOwnerState.appendOwnerState)(elementType, (0, _extendsDefault.default)({}, mergedProps, {
+        ref
+    }), ownerState);
+    return props;
+}
+
+},{"@babel/runtime/helpers/esm/extends":"fTBFS","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","@mui/utils":"iivny","./appendOwnerState":"hedlX","./mergeSlotProps":"4QtyH","./resolveComponentProps":"bdeRV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4QtyH":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * Merges the slot component internal props (usually coming from a hook)
+ * with the externally provided ones.
+ *
+ * The merge order is (the latter overrides the former):
+ * 1. The internal props (specified as a getter function to work with get*Props hook result)
+ * 2. Additional props (specified internally on a Base UI component)
+ * 3. External props specified on the owner component. These should only be used on a root slot.
+ * 4. External props specified in the `slotProps.*` prop.
+ * 5. The `className` prop - combined from all the above.
+ * @param parameters
+ * @returns
+ */ parcelHelpers.export(exports, "mergeSlotProps", ()=>mergeSlotProps);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _extractEventHandlers = require("./extractEventHandlers");
+var _omitEventHandlers = require("./omitEventHandlers");
+function mergeSlotProps(parameters) {
+    const { getSlotProps, additionalProps, externalSlotProps, externalForwardedProps, className } = parameters;
+    if (!getSlotProps) {
+        // The simpler case - getSlotProps is not defined, so no internal event handlers are defined,
+        // so we can simply merge all the props without having to worry about extracting event handlers.
+        const joinedClasses = (0, _clsxDefault.default)(additionalProps == null ? void 0 : additionalProps.className, className, externalForwardedProps == null ? void 0 : externalForwardedProps.className, externalSlotProps == null ? void 0 : externalSlotProps.className);
+        const mergedStyle = (0, _extendsDefault.default)({}, additionalProps == null ? void 0 : additionalProps.style, externalForwardedProps == null ? void 0 : externalForwardedProps.style, externalSlotProps == null ? void 0 : externalSlotProps.style);
+        const props = (0, _extendsDefault.default)({}, additionalProps, externalForwardedProps, externalSlotProps);
+        if (joinedClasses.length > 0) props.className = joinedClasses;
+        if (Object.keys(mergedStyle).length > 0) props.style = mergedStyle;
+        return {
+            props,
+            internalRef: undefined
+        };
+    }
+    // In this case, getSlotProps is responsible for calling the external event handlers.
+    // We don't need to include them in the merged props because of this.
+    const eventHandlers = (0, _extractEventHandlers.extractEventHandlers)((0, _extendsDefault.default)({}, externalForwardedProps, externalSlotProps));
+    const componentsPropsWithoutEventHandlers = (0, _omitEventHandlers.omitEventHandlers)(externalSlotProps);
+    const otherPropsWithoutEventHandlers = (0, _omitEventHandlers.omitEventHandlers)(externalForwardedProps);
+    const internalSlotProps = getSlotProps(eventHandlers);
+    // The order of classes is important here.
+    // Emotion (that we use in libraries consuming Base UI) depends on this order
+    // to properly override style. It requires the most important classes to be last
+    // (see https://github.com/mui/material-ui/pull/33205) for the related discussion.
+    const joinedClasses = (0, _clsxDefault.default)(internalSlotProps == null ? void 0 : internalSlotProps.className, additionalProps == null ? void 0 : additionalProps.className, className, externalForwardedProps == null ? void 0 : externalForwardedProps.className, externalSlotProps == null ? void 0 : externalSlotProps.className);
+    const mergedStyle = (0, _extendsDefault.default)({}, internalSlotProps == null ? void 0 : internalSlotProps.style, additionalProps == null ? void 0 : additionalProps.style, externalForwardedProps == null ? void 0 : externalForwardedProps.style, externalSlotProps == null ? void 0 : externalSlotProps.style);
+    const props = (0, _extendsDefault.default)({}, internalSlotProps, additionalProps, otherPropsWithoutEventHandlers, componentsPropsWithoutEventHandlers);
+    if (joinedClasses.length > 0) props.className = joinedClasses;
+    if (Object.keys(mergedStyle).length > 0) props.style = mergedStyle;
+    return {
+        props,
+        internalRef: internalSlotProps.ref
+    };
+}
+
+},{"@babel/runtime/helpers/esm/extends":"fTBFS","clsx":"gocd3","./extractEventHandlers":"iYj1L","./omitEventHandlers":"h0aD1","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"h0aD1":[function(require,module,exports) {
+/**
+ * Removes event handlers from the given object.
+ * A field is considered an event handler if it is a function with a name beginning with `on`.
+ *
+ * @param object Object to remove event handlers from.
+ * @returns Object with event handlers removed.
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "omitEventHandlers", ()=>omitEventHandlers);
+function omitEventHandlers(object) {
+    if (object === undefined) return {};
+    const result = {};
+    Object.keys(object).filter((prop)=>!(prop.match(/^on[A-Z]/) && typeof object[prop] === "function")).forEach((prop)=>{
+        result[prop] = object[prop];
+    });
+    return result;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e4lsd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "styled", ()=>(0, _styledDefault.default));
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+parcelHelpers.export(exports, "createUseThemeProps", ()=>createUseThemeProps);
+var _useThemeProps = require("../styles/useThemeProps");
+var _useThemePropsDefault = parcelHelpers.interopDefault(_useThemeProps);
+var _styled = require("../styles/styled");
+var _styledDefault = parcelHelpers.interopDefault(_styled);
+function createUseThemeProps(name) {
+    return 0, _useThemePropsDefault.default;
+}
+
+},{"../styles/useThemeProps":"dewuS","../styles/styled":"32xTg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gbkfk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>(0, _defaultPropsProviderDefault.default));
+parcelHelpers.export(exports, "useDefaultProps", ()=>(0, _defaultPropsProvider.useDefaultProps));
+var _defaultPropsProvider = require("./DefaultPropsProvider");
+var _defaultPropsProviderDefault = parcelHelpers.interopDefault(_defaultPropsProvider);
+
+},{"./DefaultPropsProvider":"fi7Gq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fi7Gq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "useDefaultProps", ()=>useDefaultProps);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _defaultPropsProvider = require("@mui/system/DefaultPropsProvider");
+var _defaultPropsProviderDefault = parcelHelpers.interopDefault(_defaultPropsProvider);
+var _jsxRuntime = require("react/jsx-runtime");
+"use client";
+function DefaultPropsProvider(props) {
+    return /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _defaultPropsProviderDefault.default), (0, _extendsDefault.default)({}, props));
+}
+DefaultPropsProvider.propTypes /* remove-proptypes */  = {
+    // ┌────────────────────────────── Warning ──────────────────────────────┐
+    // │ These PropTypes are generated from the TypeScript type definitions. │
+    // │ To update them, edit the TypeScript types and run `pnpm proptypes`. │
+    // └─────────────────────────────────────────────────────────────────────┘
+    /**
+   * @ignore
+   */ children: (0, _propTypesDefault.default).node,
+    /**
+   * @ignore
+   */ value: (0, _propTypesDefault.default).object.isRequired
+};
+exports.default = DefaultPropsProvider;
+function useDefaultProps(params) {
+    return (0, _defaultPropsProvider.useDefaultProps)(params);
+}
+
+},{"@babel/runtime/helpers/esm/extends":"fTBFS","react":"21dqq","prop-types":"7wKI2","@mui/system/DefaultPropsProvider":"XobhQ","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"XobhQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>(0, _defaultPropsProviderDefault.default));
+parcelHelpers.export(exports, "useDefaultProps", ()=>(0, _defaultPropsProvider.useDefaultProps));
+var _defaultPropsProvider = require("./DefaultPropsProvider");
+var _defaultPropsProviderDefault = parcelHelpers.interopDefault(_defaultPropsProvider);
+
+},{"./DefaultPropsProvider":"RpKqH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"RpKqH":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "useDefaultProps", ()=>useDefaultProps);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _resolveProps = require("@mui/utils/resolveProps");
+var _resolvePropsDefault = parcelHelpers.interopDefault(_resolveProps);
+var _jsxRuntime = require("react/jsx-runtime");
+"use client";
+const PropsContext = /*#__PURE__*/ _react.createContext(undefined);
+function DefaultPropsProvider({ value, children }) {
+    return /*#__PURE__*/ (0, _jsxRuntime.jsx)(PropsContext.Provider, {
+        value: value,
+        children: children
+    });
+}
+DefaultPropsProvider.propTypes /* remove-proptypes */  = {
+    // ┌────────────────────────────── Warning ──────────────────────────────┐
+    // │ These PropTypes are generated from the TypeScript type definitions. │
+    // │ To update them, edit the TypeScript types and run `pnpm proptypes`. │
+    // └─────────────────────────────────────────────────────────────────────┘
+    /**
+   * @ignore
+   */ children: (0, _propTypesDefault.default).node,
+    /**
+   * @ignore
+   */ value: (0, _propTypesDefault.default).object
+};
+function getThemeProps(params) {
+    const { theme, name, props } = params;
+    if (!theme || !theme.components || !theme.components[name]) return props;
+    const config = theme.components[name];
+    if (config.defaultProps) // compatible with v5 signature
+    return (0, _resolvePropsDefault.default)(config.defaultProps, props);
+    if (!config.styleOverrides && !config.variants) // v6 signature, no property 'defaultProps'
+    return (0, _resolvePropsDefault.default)(config, props);
+    return props;
+}
+function useDefaultProps({ props, name }) {
+    const ctx = _react.useContext(PropsContext);
+    return getThemeProps({
+        props,
+        name,
+        theme: {
+            components: ctx
+        }
+    });
+}
+exports.default = DefaultPropsProvider;
+
+},{"react":"21dqq","prop-types":"7wKI2","@mui/utils/resolveProps":"lUOhv","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lwNtZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _capitalize = require("@mui/utils/capitalize");
+var _capitalizeDefault = parcelHelpers.interopDefault(_capitalize);
+exports.default = (0, _capitalizeDefault.default);
+
+},{"@mui/utils/capitalize":"9wbAb","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"24FJc":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getBadgeUtilityClass", ()=>getBadgeUtilityClass);
+var _generateUtilityClasses = require("@mui/utils/generateUtilityClasses");
+var _generateUtilityClassesDefault = parcelHelpers.interopDefault(_generateUtilityClasses);
+var _generateUtilityClass = require("@mui/utils/generateUtilityClass");
+var _generateUtilityClassDefault = parcelHelpers.interopDefault(_generateUtilityClass);
+function getBadgeUtilityClass(slot) {
+    return (0, _generateUtilityClassDefault.default)("MuiBadge", slot);
+}
+const badgeClasses = (0, _generateUtilityClassesDefault.default)("MuiBadge", [
+    "root",
+    "badge",
+    "dot",
+    "standard",
+    "anchorOriginTopRight",
+    "anchorOriginBottomRight",
+    "anchorOriginTopLeft",
+    "anchorOriginBottomLeft",
+    "invisible",
+    "colorError",
+    "colorInfo",
+    "colorPrimary",
+    "colorSecondary",
+    "colorSuccess",
+    "colorWarning",
+    "overlapRectangular",
+    "overlapCircular",
+    // TODO: v6 remove the overlap value from these class keys
+    "anchorOriginTopLeftCircular",
+    "anchorOriginTopLeftRectangular",
+    "anchorOriginTopRightCircular",
+    "anchorOriginTopRightRectangular",
+    "anchorOriginBottomLeftCircular",
+    "anchorOriginBottomLeftRectangular",
+    "anchorOriginBottomRightCircular",
+    "anchorOriginBottomRightRectangular"
+]);
+exports.default = badgeClasses;
+
+},{"@mui/utils/generateUtilityClasses":"7eO93","@mui/utils/generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eQD0H":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>(0, _boxDefault.default));
+parcelHelpers.export(exports, "boxClasses", ()=>(0, _boxClassesDefault.default));
+var _box = require("./Box");
+var _boxDefault = parcelHelpers.interopDefault(_box);
+var _boxClasses = require("./boxClasses");
+var _boxClassesDefault = parcelHelpers.interopDefault(_boxClasses);
+parcelHelpers.exportAll(_boxClasses, exports);
+"use client";
+
+},{"./Box":"hk5c0","./boxClasses":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hk5c0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _system = require("@mui/system");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _className = require("../className");
+var _styles = require("../styles");
+var _identifier = require("../styles/identifier");
+var _identifierDefault = parcelHelpers.interopDefault(_identifier);
+var _boxClasses = require("./boxClasses");
+var _boxClassesDefault = parcelHelpers.interopDefault(_boxClasses);
+"use client";
+const defaultTheme = (0, _styles.createTheme)();
+const Box = (0, _system.createBox)({
+    themeId: (0, _identifierDefault.default),
+    defaultTheme,
+    defaultClassName: (0, _boxClassesDefault.default).root,
+    generateClassName: (0, _className.unstable_ClassNameGenerator).generate
+});
+Box.propTypes /* remove-proptypes */  = {
+    // ┌────────────────────────────── Warning ──────────────────────────────┐
+    // │ These PropTypes are generated from the TypeScript type definitions. │
+    // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+    // └─────────────────────────────────────────────────────────────────────┘
+    /**
+   * @ignore
+   */ children: (0, _propTypesDefault.default).node,
+    /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */ component: (0, _propTypesDefault.default).elementType,
+    /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */ sx: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).oneOfType([
+            (0, _propTypesDefault.default).func,
+            (0, _propTypesDefault.default).object,
+            (0, _propTypesDefault.default).bool
+        ])),
+        (0, _propTypesDefault.default).func,
+        (0, _propTypesDefault.default).object
+    ])
+};
+exports.default = Box;
+
+},{"@mui/system":"Q0Zql","prop-types":"7wKI2","../className":"3zmn3","../styles":"1lzai","../styles/identifier":"7r4RQ","./boxClasses":"hyi6W","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3zmn3":[function(require,module,exports) {
+// eslint-disable-next-line import/prefer-default-export
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "unstable_ClassNameGenerator", ()=>(0, _utils.unstable_ClassNameGenerator));
+var _utils = require("@mui/utils");
+
+},{"@mui/utils":"iivny","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hyi6W":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _generateUtilityClasses = require("@mui/utils/generateUtilityClasses");
@@ -42851,108 +43561,7 @@ ButtonBase.propTypes /* remove-proptypes */  = {
 };
 exports.default = ButtonBase;
 
-},{"@babel/runtime/helpers/esm/extends":"fTBFS","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","react":"21dqq","prop-types":"7wKI2","clsx":"gocd3","@mui/utils/refType":"cNuf9","@mui/utils/elementTypeAcceptingRef":"86POH","@mui/utils/composeClasses":"4kKno","../styles/styled":"32xTg","../DefaultPropsProvider":"gbkfk","../utils/useForkRef":"Q1vCZ","../utils/useEventCallback":"bucP2","../utils/useIsFocusVisible":"6c2qt","./TouchRipple":"4NaC3","./buttonBaseClasses":"7PrRt","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gbkfk":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>(0, _defaultPropsProviderDefault.default));
-parcelHelpers.export(exports, "useDefaultProps", ()=>(0, _defaultPropsProvider.useDefaultProps));
-var _defaultPropsProvider = require("./DefaultPropsProvider");
-var _defaultPropsProviderDefault = parcelHelpers.interopDefault(_defaultPropsProvider);
-
-},{"./DefaultPropsProvider":"fi7Gq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fi7Gq":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "useDefaultProps", ()=>useDefaultProps);
-var _extends = require("@babel/runtime/helpers/esm/extends");
-var _extendsDefault = parcelHelpers.interopDefault(_extends);
-var _react = require("react");
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _defaultPropsProvider = require("@mui/system/DefaultPropsProvider");
-var _defaultPropsProviderDefault = parcelHelpers.interopDefault(_defaultPropsProvider);
-var _jsxRuntime = require("react/jsx-runtime");
-"use client";
-function DefaultPropsProvider(props) {
-    return /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _defaultPropsProviderDefault.default), (0, _extendsDefault.default)({}, props));
-}
-DefaultPropsProvider.propTypes /* remove-proptypes */  = {
-    // ┌────────────────────────────── Warning ──────────────────────────────┐
-    // │ These PropTypes are generated from the TypeScript type definitions. │
-    // │ To update them, edit the TypeScript types and run `pnpm proptypes`. │
-    // └─────────────────────────────────────────────────────────────────────┘
-    /**
-   * @ignore
-   */ children: (0, _propTypesDefault.default).node,
-    /**
-   * @ignore
-   */ value: (0, _propTypesDefault.default).object.isRequired
-};
-exports.default = DefaultPropsProvider;
-function useDefaultProps(params) {
-    return (0, _defaultPropsProvider.useDefaultProps)(params);
-}
-
-},{"@babel/runtime/helpers/esm/extends":"fTBFS","react":"21dqq","prop-types":"7wKI2","@mui/system/DefaultPropsProvider":"XobhQ","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"XobhQ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>(0, _defaultPropsProviderDefault.default));
-parcelHelpers.export(exports, "useDefaultProps", ()=>(0, _defaultPropsProvider.useDefaultProps));
-var _defaultPropsProvider = require("./DefaultPropsProvider");
-var _defaultPropsProviderDefault = parcelHelpers.interopDefault(_defaultPropsProvider);
-
-},{"./DefaultPropsProvider":"RpKqH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"RpKqH":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "useDefaultProps", ()=>useDefaultProps);
-var _react = require("react");
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _resolveProps = require("@mui/utils/resolveProps");
-var _resolvePropsDefault = parcelHelpers.interopDefault(_resolveProps);
-var _jsxRuntime = require("react/jsx-runtime");
-"use client";
-const PropsContext = /*#__PURE__*/ _react.createContext(undefined);
-function DefaultPropsProvider({ value, children }) {
-    return /*#__PURE__*/ (0, _jsxRuntime.jsx)(PropsContext.Provider, {
-        value: value,
-        children: children
-    });
-}
-DefaultPropsProvider.propTypes /* remove-proptypes */  = {
-    // ┌────────────────────────────── Warning ──────────────────────────────┐
-    // │ These PropTypes are generated from the TypeScript type definitions. │
-    // │ To update them, edit the TypeScript types and run `pnpm proptypes`. │
-    // └─────────────────────────────────────────────────────────────────────┘
-    /**
-   * @ignore
-   */ children: (0, _propTypesDefault.default).node,
-    /**
-   * @ignore
-   */ value: (0, _propTypesDefault.default).object
-};
-function getThemeProps(params) {
-    const { theme, name, props } = params;
-    if (!theme || !theme.components || !theme.components[name]) return props;
-    const config = theme.components[name];
-    if (config.defaultProps) // compatible with v5 signature
-    return (0, _resolvePropsDefault.default)(config.defaultProps, props);
-    if (!config.styleOverrides && !config.variants) // v6 signature, no property 'defaultProps'
-    return (0, _resolvePropsDefault.default)(config, props);
-    return props;
-}
-function useDefaultProps({ props, name }) {
-    const ctx = _react.useContext(PropsContext);
-    return getThemeProps({
-        props,
-        name,
-        theme: {
-            components: ctx
-        }
-    });
-}
-exports.default = DefaultPropsProvider;
-
-},{"react":"21dqq","prop-types":"7wKI2","@mui/utils/resolveProps":"lUOhv","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Q1vCZ":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/extends":"fTBFS","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","react":"21dqq","prop-types":"7wKI2","clsx":"gocd3","@mui/utils/refType":"cNuf9","@mui/utils/elementTypeAcceptingRef":"86POH","@mui/utils/composeClasses":"4kKno","../styles/styled":"32xTg","../DefaultPropsProvider":"gbkfk","../utils/useForkRef":"Q1vCZ","../utils/useEventCallback":"bucP2","../utils/useIsFocusVisible":"6c2qt","./TouchRipple":"4NaC3","./buttonBaseClasses":"7PrRt","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Q1vCZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _useForkRef = require("@mui/utils/useForkRef");
@@ -44211,6 +44820,532 @@ const cardContentClasses = (0, _generateUtilityClassesDefault.default)("MuiCardC
 ]);
 exports.default = cardContentClasses;
 
+},{"@mui/utils/generateUtilityClasses":"7eO93","@mui/utils/generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hRKul":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>(0, _cardHeaderDefault.default));
+parcelHelpers.export(exports, "cardHeaderClasses", ()=>(0, _cardHeaderClassesDefault.default));
+var _cardHeader = require("./CardHeader");
+var _cardHeaderDefault = parcelHelpers.interopDefault(_cardHeader);
+var _cardHeaderClasses = require("./cardHeaderClasses");
+var _cardHeaderClassesDefault = parcelHelpers.interopDefault(_cardHeaderClasses);
+parcelHelpers.exportAll(_cardHeaderClasses, exports);
+"use client";
+
+},{"./CardHeader":"4D4kj","./cardHeaderClasses":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4D4kj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _composeClasses = require("@mui/utils/composeClasses");
+var _composeClassesDefault = parcelHelpers.interopDefault(_composeClasses);
+var _typography = require("../Typography");
+var _typographyDefault = parcelHelpers.interopDefault(_typography);
+var _defaultPropsProvider = require("../DefaultPropsProvider");
+var _styled = require("../styles/styled");
+var _styledDefault = parcelHelpers.interopDefault(_styled);
+var _cardHeaderClasses = require("./cardHeaderClasses");
+var _cardHeaderClassesDefault = parcelHelpers.interopDefault(_cardHeaderClasses);
+var _jsxRuntime = require("react/jsx-runtime");
+"use client";
+const _excluded = [
+    "action",
+    "avatar",
+    "className",
+    "component",
+    "disableTypography",
+    "subheader",
+    "subheaderTypographyProps",
+    "title",
+    "titleTypographyProps"
+];
+const useUtilityClasses = (ownerState)=>{
+    const { classes } = ownerState;
+    const slots = {
+        root: [
+            "root"
+        ],
+        avatar: [
+            "avatar"
+        ],
+        action: [
+            "action"
+        ],
+        content: [
+            "content"
+        ],
+        title: [
+            "title"
+        ],
+        subheader: [
+            "subheader"
+        ]
+    };
+    return (0, _composeClassesDefault.default)(slots, (0, _cardHeaderClasses.getCardHeaderUtilityClass), classes);
+};
+const CardHeaderRoot = (0, _styledDefault.default)("div", {
+    name: "MuiCardHeader",
+    slot: "Root",
+    overridesResolver: (props, styles)=>(0, _extendsDefault.default)({
+            [`& .${(0, _cardHeaderClassesDefault.default).title}`]: styles.title,
+            [`& .${(0, _cardHeaderClassesDefault.default).subheader}`]: styles.subheader
+        }, styles.root)
+})({
+    display: "flex",
+    alignItems: "center",
+    padding: 16
+});
+const CardHeaderAvatar = (0, _styledDefault.default)("div", {
+    name: "MuiCardHeader",
+    slot: "Avatar",
+    overridesResolver: (props, styles)=>styles.avatar
+})({
+    display: "flex",
+    flex: "0 0 auto",
+    marginRight: 16
+});
+const CardHeaderAction = (0, _styledDefault.default)("div", {
+    name: "MuiCardHeader",
+    slot: "Action",
+    overridesResolver: (props, styles)=>styles.action
+})({
+    flex: "0 0 auto",
+    alignSelf: "flex-start",
+    marginTop: -4,
+    marginRight: -8,
+    marginBottom: -4
+});
+const CardHeaderContent = (0, _styledDefault.default)("div", {
+    name: "MuiCardHeader",
+    slot: "Content",
+    overridesResolver: (props, styles)=>styles.content
+})({
+    flex: "1 1 auto"
+});
+const CardHeader = /*#__PURE__*/ _react.forwardRef(function CardHeader(inProps, ref) {
+    const props = (0, _defaultPropsProvider.useDefaultProps)({
+        props: inProps,
+        name: "MuiCardHeader"
+    });
+    const { action, avatar, className, component = "div", disableTypography = false, subheader: subheaderProp, subheaderTypographyProps, title: titleProp, titleTypographyProps } = props, other = (0, _objectWithoutPropertiesLooseDefault.default)(props, _excluded);
+    const ownerState = (0, _extendsDefault.default)({}, props, {
+        component,
+        disableTypography
+    });
+    const classes = useUtilityClasses(ownerState);
+    let title = titleProp;
+    if (title != null && title.type !== (0, _typographyDefault.default) && !disableTypography) title = /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _typographyDefault.default), (0, _extendsDefault.default)({
+        variant: avatar ? "body2" : "h5",
+        className: classes.title,
+        component: "span",
+        display: "block"
+    }, titleTypographyProps, {
+        children: title
+    }));
+    let subheader = subheaderProp;
+    if (subheader != null && subheader.type !== (0, _typographyDefault.default) && !disableTypography) subheader = /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _typographyDefault.default), (0, _extendsDefault.default)({
+        variant: avatar ? "body2" : "body1",
+        className: classes.subheader,
+        color: "text.secondary",
+        component: "span",
+        display: "block"
+    }, subheaderTypographyProps, {
+        children: subheader
+    }));
+    return /*#__PURE__*/ (0, _jsxRuntime.jsxs)(CardHeaderRoot, (0, _extendsDefault.default)({
+        className: (0, _clsxDefault.default)(classes.root, className),
+        as: component,
+        ref: ref,
+        ownerState: ownerState
+    }, other, {
+        children: [
+            avatar && /*#__PURE__*/ (0, _jsxRuntime.jsx)(CardHeaderAvatar, {
+                className: classes.avatar,
+                ownerState: ownerState,
+                children: avatar
+            }),
+            /*#__PURE__*/ (0, _jsxRuntime.jsxs)(CardHeaderContent, {
+                className: classes.content,
+                ownerState: ownerState,
+                children: [
+                    title,
+                    subheader
+                ]
+            }),
+            action && /*#__PURE__*/ (0, _jsxRuntime.jsx)(CardHeaderAction, {
+                className: classes.action,
+                ownerState: ownerState,
+                children: action
+            })
+        ]
+    }));
+});
+CardHeader.propTypes /* remove-proptypes */  = {
+    // ┌────────────────────────────── Warning ──────────────────────────────┐
+    // │ These PropTypes are generated from the TypeScript type definitions. │
+    // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+    // └─────────────────────────────────────────────────────────────────────┘
+    /**
+   * The action to display in the card header.
+   */ action: (0, _propTypesDefault.default).node,
+    /**
+   * The Avatar element to display.
+   */ avatar: (0, _propTypesDefault.default).node,
+    /**
+   * @ignore
+   */ children: (0, _propTypesDefault.default).node,
+    /**
+   * Override or extend the styles applied to the component.
+   */ classes: (0, _propTypesDefault.default).object,
+    /**
+   * @ignore
+   */ className: (0, _propTypesDefault.default).string,
+    /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */ component: (0, _propTypesDefault.default).elementType,
+    /**
+   * If `true`, `subheader` and `title` won't be wrapped by a Typography component.
+   * This can be useful to render an alternative Typography variant by wrapping
+   * the `title` text, and optional `subheader` text
+   * with the Typography component.
+   * @default false
+   */ disableTypography: (0, _propTypesDefault.default).bool,
+    /**
+   * The content of the component.
+   */ subheader: (0, _propTypesDefault.default).node,
+    /**
+   * These props will be forwarded to the subheader
+   * (as long as disableTypography is not `true`).
+   */ subheaderTypographyProps: (0, _propTypesDefault.default).object,
+    /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */ sx: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).oneOfType([
+            (0, _propTypesDefault.default).func,
+            (0, _propTypesDefault.default).object,
+            (0, _propTypesDefault.default).bool
+        ])),
+        (0, _propTypesDefault.default).func,
+        (0, _propTypesDefault.default).object
+    ]),
+    /**
+   * The content of the component.
+   */ title: (0, _propTypesDefault.default).node,
+    /**
+   * These props will be forwarded to the title
+   * (as long as disableTypography is not `true`).
+   */ titleTypographyProps: (0, _propTypesDefault.default).object
+};
+exports.default = CardHeader;
+
+},{"@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","@babel/runtime/helpers/esm/extends":"fTBFS","react":"21dqq","prop-types":"7wKI2","clsx":"gocd3","@mui/utils/composeClasses":"4kKno","../Typography":"faxSz","../DefaultPropsProvider":"gbkfk","../styles/styled":"32xTg","./cardHeaderClasses":"53Cxe","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"faxSz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>(0, _typographyDefault.default));
+parcelHelpers.export(exports, "typographyClasses", ()=>(0, _typographyClassesDefault.default));
+var _typography = require("./Typography");
+var _typographyDefault = parcelHelpers.interopDefault(_typography);
+var _typographyClasses = require("./typographyClasses");
+var _typographyClassesDefault = parcelHelpers.interopDefault(_typographyClasses);
+parcelHelpers.exportAll(_typographyClasses, exports);
+"use client";
+
+},{"./Typography":"chcJ4","./typographyClasses":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"chcJ4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "TypographyRoot", ()=>TypographyRoot);
+var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _styleFunctionSx = require("@mui/system/styleFunctionSx");
+var _composeClasses = require("@mui/utils/composeClasses");
+var _composeClassesDefault = parcelHelpers.interopDefault(_composeClasses);
+var _styled = require("../styles/styled");
+var _styledDefault = parcelHelpers.interopDefault(_styled);
+var _defaultPropsProvider = require("../DefaultPropsProvider");
+var _capitalize = require("../utils/capitalize");
+var _capitalizeDefault = parcelHelpers.interopDefault(_capitalize);
+var _typographyClasses = require("./typographyClasses");
+var _jsxRuntime = require("react/jsx-runtime");
+"use client";
+const _excluded = [
+    "align",
+    "className",
+    "component",
+    "gutterBottom",
+    "noWrap",
+    "paragraph",
+    "variant",
+    "variantMapping"
+];
+const useUtilityClasses = (ownerState)=>{
+    const { align, gutterBottom, noWrap, paragraph, variant, classes } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            variant,
+            ownerState.align !== "inherit" && `align${(0, _capitalizeDefault.default)(align)}`,
+            gutterBottom && "gutterBottom",
+            noWrap && "noWrap",
+            paragraph && "paragraph"
+        ]
+    };
+    return (0, _composeClassesDefault.default)(slots, (0, _typographyClasses.getTypographyUtilityClass), classes);
+};
+const TypographyRoot = (0, _styledDefault.default)("span", {
+    name: "MuiTypography",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        const { ownerState } = props;
+        return [
+            styles.root,
+            ownerState.variant && styles[ownerState.variant],
+            ownerState.align !== "inherit" && styles[`align${(0, _capitalizeDefault.default)(ownerState.align)}`],
+            ownerState.noWrap && styles.noWrap,
+            ownerState.gutterBottom && styles.gutterBottom,
+            ownerState.paragraph && styles.paragraph
+        ];
+    }
+})(({ theme, ownerState })=>(0, _extendsDefault.default)({
+        margin: 0
+    }, ownerState.variant === "inherit" && {
+        // Some elements, like <button> on Chrome have default font that doesn't inherit, reset this.
+        font: "inherit"
+    }, ownerState.variant !== "inherit" && theme.typography[ownerState.variant], ownerState.align !== "inherit" && {
+        textAlign: ownerState.align
+    }, ownerState.noWrap && {
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap"
+    }, ownerState.gutterBottom && {
+        marginBottom: "0.35em"
+    }, ownerState.paragraph && {
+        marginBottom: 16
+    }));
+const defaultVariantMapping = {
+    h1: "h1",
+    h2: "h2",
+    h3: "h3",
+    h4: "h4",
+    h5: "h5",
+    h6: "h6",
+    subtitle1: "h6",
+    subtitle2: "h6",
+    body1: "p",
+    body2: "p",
+    inherit: "p"
+};
+// TODO v6: deprecate these color values in v5.x and remove the transformation in v6
+const colorTransformations = {
+    primary: "primary.main",
+    textPrimary: "text.primary",
+    secondary: "secondary.main",
+    textSecondary: "text.secondary",
+    error: "error.main"
+};
+const transformDeprecatedColors = (color)=>{
+    return colorTransformations[color] || color;
+};
+const Typography = /*#__PURE__*/ _react.forwardRef(function Typography(inProps, ref) {
+    const themeProps = (0, _defaultPropsProvider.useDefaultProps)({
+        props: inProps,
+        name: "MuiTypography"
+    });
+    const color = transformDeprecatedColors(themeProps.color);
+    const props = (0, _styleFunctionSx.extendSxProp)((0, _extendsDefault.default)({}, themeProps, {
+        color
+    }));
+    const { align = "inherit", className, component, gutterBottom = false, noWrap = false, paragraph = false, variant = "body1", variantMapping = defaultVariantMapping } = props, other = (0, _objectWithoutPropertiesLooseDefault.default)(props, _excluded);
+    const ownerState = (0, _extendsDefault.default)({}, props, {
+        align,
+        color,
+        className,
+        component,
+        gutterBottom,
+        noWrap,
+        paragraph,
+        variant,
+        variantMapping
+    });
+    const Component = component || (paragraph ? "p" : variantMapping[variant] || defaultVariantMapping[variant]) || "span";
+    const classes = useUtilityClasses(ownerState);
+    return /*#__PURE__*/ (0, _jsxRuntime.jsx)(TypographyRoot, (0, _extendsDefault.default)({
+        as: Component,
+        ref: ref,
+        ownerState: ownerState,
+        className: (0, _clsxDefault.default)(classes.root, className)
+    }, other));
+});
+Typography.propTypes /* remove-proptypes */  = {
+    // ┌────────────────────────────── Warning ──────────────────────────────┐
+    // │ These PropTypes are generated from the TypeScript type definitions. │
+    // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+    // └─────────────────────────────────────────────────────────────────────┘
+    /**
+   * Set the text-align on the component.
+   * @default 'inherit'
+   */ align: (0, _propTypesDefault.default).oneOf([
+        "center",
+        "inherit",
+        "justify",
+        "left",
+        "right"
+    ]),
+    /**
+   * The content of the component.
+   */ children: (0, _propTypesDefault.default).node,
+    /**
+   * Override or extend the styles applied to the component.
+   */ classes: (0, _propTypesDefault.default).object,
+    /**
+   * @ignore
+   */ className: (0, _propTypesDefault.default).string,
+    /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */ component: (0, _propTypesDefault.default).elementType,
+    /**
+   * If `true`, the text will have a bottom margin.
+   * @default false
+   */ gutterBottom: (0, _propTypesDefault.default).bool,
+    /**
+   * If `true`, the text will not wrap, but instead will truncate with a text overflow ellipsis.
+   *
+   * Note that text overflow can only happen with block or inline-block level elements
+   * (the element needs to have a width in order to overflow).
+   * @default false
+   */ noWrap: (0, _propTypesDefault.default).bool,
+    /**
+   * If `true`, the element will be a paragraph element.
+   * @default false
+   */ paragraph: (0, _propTypesDefault.default).bool,
+    /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */ sx: (0, _propTypesDefault.default).oneOfType([
+        (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).oneOfType([
+            (0, _propTypesDefault.default).func,
+            (0, _propTypesDefault.default).object,
+            (0, _propTypesDefault.default).bool
+        ])),
+        (0, _propTypesDefault.default).func,
+        (0, _propTypesDefault.default).object
+    ]),
+    /**
+   * Applies the theme typography styles.
+   * @default 'body1'
+   */ variant: (0, _propTypesDefault.default /* @typescript-to-proptypes-ignore */ ).oneOfType([
+        (0, _propTypesDefault.default).oneOf([
+            "body1",
+            "body2",
+            "button",
+            "caption",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "inherit",
+            "overline",
+            "subtitle1",
+            "subtitle2"
+        ]),
+        (0, _propTypesDefault.default).string
+    ]),
+    /**
+   * The component maps the variant prop to a range of different HTML element types.
+   * For instance, subtitle1 to `<h6>`.
+   * If you wish to change that mapping, you can provide your own.
+   * Alternatively, you can use the `component` prop.
+   * @default {
+   *   h1: 'h1',
+   *   h2: 'h2',
+   *   h3: 'h3',
+   *   h4: 'h4',
+   *   h5: 'h5',
+   *   h6: 'h6',
+   *   subtitle1: 'h6',
+   *   subtitle2: 'h6',
+   *   body1: 'p',
+   *   body2: 'p',
+   *   inherit: 'p',
+   * }
+   */ variantMapping: (0, _propTypesDefault.default /* @typescript-to-proptypes-ignore */ ).object
+};
+exports.default = Typography;
+
+},{"@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","@babel/runtime/helpers/esm/extends":"fTBFS","react":"21dqq","prop-types":"7wKI2","clsx":"gocd3","@mui/system/styleFunctionSx":"bRwpN","@mui/utils/composeClasses":"4kKno","../styles/styled":"32xTg","../DefaultPropsProvider":"gbkfk","../utils/capitalize":"lwNtZ","./typographyClasses":"aW8pq","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aW8pq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getTypographyUtilityClass", ()=>getTypographyUtilityClass);
+var _generateUtilityClasses = require("@mui/utils/generateUtilityClasses");
+var _generateUtilityClassesDefault = parcelHelpers.interopDefault(_generateUtilityClasses);
+var _generateUtilityClass = require("@mui/utils/generateUtilityClass");
+var _generateUtilityClassDefault = parcelHelpers.interopDefault(_generateUtilityClass);
+function getTypographyUtilityClass(slot) {
+    return (0, _generateUtilityClassDefault.default)("MuiTypography", slot);
+}
+const typographyClasses = (0, _generateUtilityClassesDefault.default)("MuiTypography", [
+    "root",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "subtitle1",
+    "subtitle2",
+    "body1",
+    "body2",
+    "inherit",
+    "button",
+    "caption",
+    "overline",
+    "alignLeft",
+    "alignRight",
+    "alignCenter",
+    "alignJustify",
+    "noWrap",
+    "gutterBottom",
+    "paragraph"
+]);
+exports.default = typographyClasses;
+
+},{"@mui/utils/generateUtilityClasses":"7eO93","@mui/utils/generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"53Cxe":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getCardHeaderUtilityClass", ()=>getCardHeaderUtilityClass);
+var _generateUtilityClasses = require("@mui/utils/generateUtilityClasses");
+var _generateUtilityClassesDefault = parcelHelpers.interopDefault(_generateUtilityClasses);
+var _generateUtilityClass = require("@mui/utils/generateUtilityClass");
+var _generateUtilityClassDefault = parcelHelpers.interopDefault(_generateUtilityClass);
+function getCardHeaderUtilityClass(slot) {
+    return (0, _generateUtilityClassDefault.default)("MuiCardHeader", slot);
+}
+const cardHeaderClasses = (0, _generateUtilityClassesDefault.default)("MuiCardHeader", [
+    "root",
+    "avatar",
+    "action",
+    "content",
+    "title",
+    "subheader"
+]);
+exports.default = cardHeaderClasses;
+
 },{"@mui/utils/generateUtilityClasses":"7eO93","@mui/utils/generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kaOTJ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -44639,14 +45774,7 @@ IconButton.propTypes /* remove-proptypes */  = {
 };
 exports.default = IconButton;
 
-},{"@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","@babel/runtime/helpers/esm/extends":"fTBFS","react":"21dqq","prop-types":"7wKI2","clsx":"gocd3","@mui/utils/chainPropTypes":"d7DEu","@mui/utils/composeClasses":"4kKno","@mui/system/colorManipulator":"bO1j5","../styles/styled":"32xTg","../DefaultPropsProvider":"gbkfk","../ButtonBase":"aeHoF","../utils/capitalize":"lwNtZ","./iconButtonClasses":"3wyQl","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lwNtZ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _capitalize = require("@mui/utils/capitalize");
-var _capitalizeDefault = parcelHelpers.interopDefault(_capitalize);
-exports.default = (0, _capitalizeDefault.default);
-
-},{"@mui/utils/capitalize":"9wbAb","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3wyQl":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","@babel/runtime/helpers/esm/extends":"fTBFS","react":"21dqq","prop-types":"7wKI2","clsx":"gocd3","@mui/utils/chainPropTypes":"d7DEu","@mui/utils/composeClasses":"4kKno","@mui/system/colorManipulator":"bO1j5","../styles/styled":"32xTg","../DefaultPropsProvider":"gbkfk","../ButtonBase":"aeHoF","../utils/capitalize":"lwNtZ","./iconButtonClasses":"3wyQl","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3wyQl":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getIconButtonUtilityClass", ()=>getIconButtonUtilityClass);
@@ -44674,285 +45802,6 @@ const iconButtonClasses = (0, _generateUtilityClassesDefault.default)("MuiIconBu
     "sizeLarge"
 ]);
 exports.default = iconButtonClasses;
-
-},{"@mui/utils/generateUtilityClasses":"7eO93","@mui/utils/generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"faxSz":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>(0, _typographyDefault.default));
-parcelHelpers.export(exports, "typographyClasses", ()=>(0, _typographyClassesDefault.default));
-var _typography = require("./Typography");
-var _typographyDefault = parcelHelpers.interopDefault(_typography);
-var _typographyClasses = require("./typographyClasses");
-var _typographyClassesDefault = parcelHelpers.interopDefault(_typographyClasses);
-parcelHelpers.exportAll(_typographyClasses, exports);
-"use client";
-
-},{"./Typography":"chcJ4","./typographyClasses":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"chcJ4":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "TypographyRoot", ()=>TypographyRoot);
-var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
-var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
-var _extends = require("@babel/runtime/helpers/esm/extends");
-var _extendsDefault = parcelHelpers.interopDefault(_extends);
-var _react = require("react");
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _styleFunctionSx = require("@mui/system/styleFunctionSx");
-var _composeClasses = require("@mui/utils/composeClasses");
-var _composeClassesDefault = parcelHelpers.interopDefault(_composeClasses);
-var _styled = require("../styles/styled");
-var _styledDefault = parcelHelpers.interopDefault(_styled);
-var _defaultPropsProvider = require("../DefaultPropsProvider");
-var _capitalize = require("../utils/capitalize");
-var _capitalizeDefault = parcelHelpers.interopDefault(_capitalize);
-var _typographyClasses = require("./typographyClasses");
-var _jsxRuntime = require("react/jsx-runtime");
-"use client";
-const _excluded = [
-    "align",
-    "className",
-    "component",
-    "gutterBottom",
-    "noWrap",
-    "paragraph",
-    "variant",
-    "variantMapping"
-];
-const useUtilityClasses = (ownerState)=>{
-    const { align, gutterBottom, noWrap, paragraph, variant, classes } = ownerState;
-    const slots = {
-        root: [
-            "root",
-            variant,
-            ownerState.align !== "inherit" && `align${(0, _capitalizeDefault.default)(align)}`,
-            gutterBottom && "gutterBottom",
-            noWrap && "noWrap",
-            paragraph && "paragraph"
-        ]
-    };
-    return (0, _composeClassesDefault.default)(slots, (0, _typographyClasses.getTypographyUtilityClass), classes);
-};
-const TypographyRoot = (0, _styledDefault.default)("span", {
-    name: "MuiTypography",
-    slot: "Root",
-    overridesResolver: (props, styles)=>{
-        const { ownerState } = props;
-        return [
-            styles.root,
-            ownerState.variant && styles[ownerState.variant],
-            ownerState.align !== "inherit" && styles[`align${(0, _capitalizeDefault.default)(ownerState.align)}`],
-            ownerState.noWrap && styles.noWrap,
-            ownerState.gutterBottom && styles.gutterBottom,
-            ownerState.paragraph && styles.paragraph
-        ];
-    }
-})(({ theme, ownerState })=>(0, _extendsDefault.default)({
-        margin: 0
-    }, ownerState.variant === "inherit" && {
-        // Some elements, like <button> on Chrome have default font that doesn't inherit, reset this.
-        font: "inherit"
-    }, ownerState.variant !== "inherit" && theme.typography[ownerState.variant], ownerState.align !== "inherit" && {
-        textAlign: ownerState.align
-    }, ownerState.noWrap && {
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap"
-    }, ownerState.gutterBottom && {
-        marginBottom: "0.35em"
-    }, ownerState.paragraph && {
-        marginBottom: 16
-    }));
-const defaultVariantMapping = {
-    h1: "h1",
-    h2: "h2",
-    h3: "h3",
-    h4: "h4",
-    h5: "h5",
-    h6: "h6",
-    subtitle1: "h6",
-    subtitle2: "h6",
-    body1: "p",
-    body2: "p",
-    inherit: "p"
-};
-// TODO v6: deprecate these color values in v5.x and remove the transformation in v6
-const colorTransformations = {
-    primary: "primary.main",
-    textPrimary: "text.primary",
-    secondary: "secondary.main",
-    textSecondary: "text.secondary",
-    error: "error.main"
-};
-const transformDeprecatedColors = (color)=>{
-    return colorTransformations[color] || color;
-};
-const Typography = /*#__PURE__*/ _react.forwardRef(function Typography(inProps, ref) {
-    const themeProps = (0, _defaultPropsProvider.useDefaultProps)({
-        props: inProps,
-        name: "MuiTypography"
-    });
-    const color = transformDeprecatedColors(themeProps.color);
-    const props = (0, _styleFunctionSx.extendSxProp)((0, _extendsDefault.default)({}, themeProps, {
-        color
-    }));
-    const { align = "inherit", className, component, gutterBottom = false, noWrap = false, paragraph = false, variant = "body1", variantMapping = defaultVariantMapping } = props, other = (0, _objectWithoutPropertiesLooseDefault.default)(props, _excluded);
-    const ownerState = (0, _extendsDefault.default)({}, props, {
-        align,
-        color,
-        className,
-        component,
-        gutterBottom,
-        noWrap,
-        paragraph,
-        variant,
-        variantMapping
-    });
-    const Component = component || (paragraph ? "p" : variantMapping[variant] || defaultVariantMapping[variant]) || "span";
-    const classes = useUtilityClasses(ownerState);
-    return /*#__PURE__*/ (0, _jsxRuntime.jsx)(TypographyRoot, (0, _extendsDefault.default)({
-        as: Component,
-        ref: ref,
-        ownerState: ownerState,
-        className: (0, _clsxDefault.default)(classes.root, className)
-    }, other));
-});
-Typography.propTypes /* remove-proptypes */  = {
-    // ┌────────────────────────────── Warning ──────────────────────────────┐
-    // │ These PropTypes are generated from the TypeScript type definitions. │
-    // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
-    // └─────────────────────────────────────────────────────────────────────┘
-    /**
-   * Set the text-align on the component.
-   * @default 'inherit'
-   */ align: (0, _propTypesDefault.default).oneOf([
-        "center",
-        "inherit",
-        "justify",
-        "left",
-        "right"
-    ]),
-    /**
-   * The content of the component.
-   */ children: (0, _propTypesDefault.default).node,
-    /**
-   * Override or extend the styles applied to the component.
-   */ classes: (0, _propTypesDefault.default).object,
-    /**
-   * @ignore
-   */ className: (0, _propTypesDefault.default).string,
-    /**
-   * The component used for the root node.
-   * Either a string to use a HTML element or a component.
-   */ component: (0, _propTypesDefault.default).elementType,
-    /**
-   * If `true`, the text will have a bottom margin.
-   * @default false
-   */ gutterBottom: (0, _propTypesDefault.default).bool,
-    /**
-   * If `true`, the text will not wrap, but instead will truncate with a text overflow ellipsis.
-   *
-   * Note that text overflow can only happen with block or inline-block level elements
-   * (the element needs to have a width in order to overflow).
-   * @default false
-   */ noWrap: (0, _propTypesDefault.default).bool,
-    /**
-   * If `true`, the element will be a paragraph element.
-   * @default false
-   */ paragraph: (0, _propTypesDefault.default).bool,
-    /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */ sx: (0, _propTypesDefault.default).oneOfType([
-        (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).oneOfType([
-            (0, _propTypesDefault.default).func,
-            (0, _propTypesDefault.default).object,
-            (0, _propTypesDefault.default).bool
-        ])),
-        (0, _propTypesDefault.default).func,
-        (0, _propTypesDefault.default).object
-    ]),
-    /**
-   * Applies the theme typography styles.
-   * @default 'body1'
-   */ variant: (0, _propTypesDefault.default /* @typescript-to-proptypes-ignore */ ).oneOfType([
-        (0, _propTypesDefault.default).oneOf([
-            "body1",
-            "body2",
-            "button",
-            "caption",
-            "h1",
-            "h2",
-            "h3",
-            "h4",
-            "h5",
-            "h6",
-            "inherit",
-            "overline",
-            "subtitle1",
-            "subtitle2"
-        ]),
-        (0, _propTypesDefault.default).string
-    ]),
-    /**
-   * The component maps the variant prop to a range of different HTML element types.
-   * For instance, subtitle1 to `<h6>`.
-   * If you wish to change that mapping, you can provide your own.
-   * Alternatively, you can use the `component` prop.
-   * @default {
-   *   h1: 'h1',
-   *   h2: 'h2',
-   *   h3: 'h3',
-   *   h4: 'h4',
-   *   h5: 'h5',
-   *   h6: 'h6',
-   *   subtitle1: 'h6',
-   *   subtitle2: 'h6',
-   *   body1: 'p',
-   *   body2: 'p',
-   *   inherit: 'p',
-   * }
-   */ variantMapping: (0, _propTypesDefault.default /* @typescript-to-proptypes-ignore */ ).object
-};
-exports.default = Typography;
-
-},{"@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","@babel/runtime/helpers/esm/extends":"fTBFS","react":"21dqq","prop-types":"7wKI2","clsx":"gocd3","@mui/system/styleFunctionSx":"bRwpN","@mui/utils/composeClasses":"4kKno","../styles/styled":"32xTg","../DefaultPropsProvider":"gbkfk","../utils/capitalize":"lwNtZ","./typographyClasses":"aW8pq","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aW8pq":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "getTypographyUtilityClass", ()=>getTypographyUtilityClass);
-var _generateUtilityClasses = require("@mui/utils/generateUtilityClasses");
-var _generateUtilityClassesDefault = parcelHelpers.interopDefault(_generateUtilityClasses);
-var _generateUtilityClass = require("@mui/utils/generateUtilityClass");
-var _generateUtilityClassDefault = parcelHelpers.interopDefault(_generateUtilityClass);
-function getTypographyUtilityClass(slot) {
-    return (0, _generateUtilityClassDefault.default)("MuiTypography", slot);
-}
-const typographyClasses = (0, _generateUtilityClassesDefault.default)("MuiTypography", [
-    "root",
-    "h1",
-    "h2",
-    "h3",
-    "h4",
-    "h5",
-    "h6",
-    "subtitle1",
-    "subtitle2",
-    "body1",
-    "body2",
-    "inherit",
-    "button",
-    "caption",
-    "overline",
-    "alignLeft",
-    "alignRight",
-    "alignCenter",
-    "alignJustify",
-    "noWrap",
-    "gutterBottom",
-    "paragraph"
-]);
-exports.default = typographyClasses;
 
 },{"@mui/utils/generateUtilityClasses":"7eO93","@mui/utils/generateUtilityClass":"d6tPU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aMs6C":[function(require,module,exports) {
 module.exports = require("d17ce4a2d8f98711").getBundleURL("bLxZJ") + "chef-bryan-entertainment.079a5731.jpg" + "?" + Date.now();
@@ -44992,7 +45841,105 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"aLSRg":[function() {},{}],"BO0AV":[function(require,module,exports) {
+},{}],"aLSRg":[function() {},{}],"e78rv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _app = require("./App");
+var _appDefault = parcelHelpers.interopDefault(_app);
+var _auth = require("./Auth");
+var _authDefault = parcelHelpers.interopDefault(_auth);
+var _toast = require("./Toast");
+var _toastDefault = parcelHelpers.interopDefault(_toast);
+class UserAPI {
+    async updateUser(userId, userData, dataType = "form") {
+        // validate
+        if (!userId || !userData) return;
+        let responseHeader;
+        // form data
+        if (dataType == "form") // fetch response header normal (form data)
+        responseHeader = {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${localStorage.accessToken}`
+            },
+            body: userData
+        };
+        else if (dataType == "json") responseHeader = {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${localStorage.accessToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userData)
+        };
+        // make fetch request to backend
+        const response = await fetch(`${(0, _appDefault.default).apiBase}/user/${userId}`, responseHeader);
+        // if response not ok
+        if (!response.ok) {
+            // console log error
+            const err = await response.json();
+            if (err) console.log(err);
+            // throw error (exit this function)      
+            throw new Error("Problem updating user");
+        }
+        // convert response payload into json - store as data
+        const data = await response.json();
+        // return data
+        return data;
+    }
+    async getUser(userId) {
+        // validate
+        if (!userId) return;
+        // fetch the json data
+        const response = await fetch(`${(0, _appDefault.default).apiBase}/user/${userId}`, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.accessToken}`
+            }
+        });
+        // if response not ok
+        if (!response.ok) {
+            // console log error
+            const err = await response.json();
+            if (err) console.log(err);
+            // throw error (exit this function)      
+            throw new Error("Problem getting user");
+        }
+        // convert response payload into json - store as data
+        const data = await response.json();
+        // return data
+        return data;
+    }
+    async addWatchEmergency(emergencyId) {
+        // validate
+        if (!emergencyId) return;
+        // fetch the json data
+        const response = await fetch(`${(0, _appDefault.default).apiBase}/user/addWatchEmergency`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${localStorage.accessToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emergencyId: emergencyId
+            })
+        });
+        // if response not ok
+        if (!response.ok) {
+            // console log error
+            const err = await response.json();
+            if (err) console.log(err);
+            // throw error (exit this function)      
+            throw new Error("Problem adding emergency to favourites");
+        }
+        // convert response payload into json - store as data
+        const data = await response.json();
+        // return data
+        return data;
+    }
+}
+exports.default = new UserAPI();
+
+},{"./App":"2kQhy","./Auth":"wuqrX","./Toast":"4N7Ir","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"BO0AV":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _app = require("../../App");
@@ -45204,7 +46151,7 @@ class AppHeader extends (0, _lit.LitElement) {
 }
 customElements.define("sc-app-header", AppHeader);
 
-},{"lit":"4antt"}],"gpsI5":[function() {},{}],"eSeCb":[function(require,module,exports) {
+},{"lit":"4antt"}],"eSeCb":[function(require,module,exports) {
 var _lit = require("lit");
 class AppFooter extends (0, _lit.LitElement) {
     constructor(){
@@ -45279,6 +46226,6 @@ class AppFooter extends (0, _lit.LitElement) {
 }
 customElements.define("sc-app-footer", AppFooter);
 
-},{"lit":"4antt"}]},["farZc","1xC6H","8lqZg"], "8lqZg", "parcelRequiree1b3")
+},{"lit":"4antt"}],"gpsI5":[function() {},{}]},["farZc","1xC6H","8lqZg"], "8lqZg", "parcelRequiree1b3")
 
 //# sourceMappingURL=index.975ef6c8.js.map

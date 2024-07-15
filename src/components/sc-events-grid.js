@@ -11,19 +11,19 @@ class EventCard extends LitElement {
 
     static get properties() {
         return {
-            name: {
+            eventdisplayname: {
                 type: String
             },
-            description: {
+            eventdescription: {
                 type: String
             },
-            image: {
+            eventimage: {
                 type: String
             },
-            length: {
+            eventoperationdatetimestart: {
                 type: String
             },
-            artist: {
+            vendorcontactname: {
                 type: String
             }
         }

@@ -4,11 +4,12 @@ import {gotoRoute, anchorRoute} from '../../Router'
 import Auth from '../../Auth'
 import Utils from '../../Utils'
 import Event from '../../Event'
+import UserAPI from '../../UserAPI'
 import Toast from '../../Toast'
 
 import * as React from 'react'
 import { renderReactComponent } from '../../components/react/reactHelper'
-import eventCard from '../../components/react/sc-event-card'
+import scEventCard from '../../components/react/sc-event-card'
 
 class HomeView {
   init(){
@@ -88,20 +89,7 @@ class HomeView {
           </div>
 
           <!--EVENTS-->
-          <div class="event-grid">
-            ${this.events == null ? html`
-                <Skeleton variant="rectangular" width={210} height={118} />
-              ` : html`
-                ${this.events.map(event => html`
-                  <sc-event class="event-card"
-                    name="${event.name}",
-                    description="${event.description}",
-                    image="${event.image}",
-                    length="${event.length}",
-                    artist="${event.artist}"
-                `)}
-              `}
-          </div>
+         
         </div>
 
         <!--VENUE-->
@@ -175,7 +163,7 @@ class HomeView {
     render(template, App.rootEl)
 
     const cardContainer = document.getElementById('card-container')
-    renderReactComponent(eventCard, cardContainer)
+    renderReactComponent(scEventCard, cardContainer)
   }
 }
 
